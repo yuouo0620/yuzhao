@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>懿生楰你</title>
+<style>
+:root {
+  --primary-color: #2b6cb0;
+  --secondary-color: #e0e7ff;
+  --sidebar-bg: #f8fafc;
+  --sidebar-border: #e2e8f0;
+}
+
+body { margin:0; font-family:'Noto Sans TC',sans-serif; display:flex; height:100vh; overflow-x:hidden;}
+/* 側邊欄 */
+.sidebar {
+  height:100%;
+  width:0;
+  position:fixed;
+  top:0;
+  left:0;
+  background: var(--sidebar-bg);
+  overflow-x:hidden;
+  transition:0.3s;
+  border-right:1px solid var(--sidebar-border);
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  box-sizing: border-box;
+  z-index: 400;
+}
+.sidebar img {margin-top:10px; width:80px; height:80px; border-radius:50%;}
+.sidebar h2 {margin:10px 0 20px; color: var(--primary-color);}
+.sidebar a {padding:10px 20px; text-decoration:none; font-size:18px; color:#334155; display:block; width:100%; text-align:center; transition:0.2s;}
+.sidebar a:hover {background: var(--secondary-color); color: var(--primary-color);}
+
+.main {flex:1; padding:40px 20px; margin-left:0; transition: margin-left 0.3s; overflow:auto; height:100vh; box-sizing:border-box;}
+.open-btn {position:fixed; top:20px; left:20px; font-size:20px; padding:10px 15px; cursor:pointer; background: var(--primary-color); color:white; border:none; border-radius:8px; z-index:300;}
+h1,h2,h3,h4 {margin-bottom:12px;}
+p {margin-bottom:12px; line-height:1.6;}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; justify-items:center;}
+.card{background:#fff; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05); padding:20px; width:100%; max-width:260px; cursor:pointer; transition:transform .2s;}
+.card:hover{transform:translateY(-4px);}
+.view{display:none;}
+.tabs{display:flex; justify-content:center; gap:10px; margin:16px 0;}
+.tab{padding:8px 12px; border-radius:8px; background:#f1f5f9; color:#334155; font-weight:600; cursor:pointer;}
+.tab.active{background: var(--primary-color); color:white;}
+.subsection{display:none;}
+.subsection.active{display:block;}
+.back-btn{display:inline-block;margin-top:20px;padding:8px 14px;background: var(--secondary-color);color: var(--primary-color);border-radius:8px;text-decoration:none;font-weight:600;}
+.rep-section{background: var(--secondary-color);padding:12px;border-radius:8px;margin:20px 0;}
+
+/* Lightbox */
+.lightbox-overlay {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 500;
+}
+.lightbox-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+</style>
+</head>
+<body>
+
+<!-- 側邊欄 -->
+<div id="mySidebar" class="sidebar" aria-hidden="true">
+  <img src="圖標.PNG" alt="Logo">
+  <h2>懿生楰你</h2>
+  <a href="#home" data-target="home">首頁</a>
+  <a href="#characters" data-target="characters">人物介紹</a>
+  <a href="#story" data-target="story">主線故事</a>
+  <a href="#pas" data-target="pas">各種PA</a>
+  <a href="#gallery" data-target="gallery">圖片廊</a>
+  <a href="#represent" data-target="represent">代表物</a>
+</div>
+
+<!-- 開啟按鈕 -->
+<button class="open-btn" onclick="toggleSidebar()" aria-expanded="false" aria-controls="mySidebar">☰</button>
+
+<!-- 主內容 -->
+<div class="main" id="mainContent">
+
+  <!-- 首頁 -->
+  <section id="home" class="view">
+    <h1>首頁</h1>
+    <p>這裡是夢向展示首頁，主內容區域可以放你的介紹文字、背景故事或其他元素。</p>
+  </section>
+
+  <!-- 人物介紹 -->
+  <section id="characters" class="view">
+    <h2>人物介紹</h2>
+    <div class="tabs">
+      <div class="tab active" data-char="sima">司馬懿</div>
+      <div class="tab" data-char="lin">林楰召</div>
+    </div>
+
+    <div id="char-sima" class="subsection active">
+      <h3>司馬懿</h3>
+      <div class="tabs">
+        <div class="tab active" data-world="wei">架空魏晉風</div>
+        <div class="tab" data-world="modern">現代AU</div>
+        <div class="tab" data-world="shan">山海奇都</div>
+      </div>
+      <div id="sima-wei" class="subsection active">
+        <p>魏都軍師，擅謀略與兵法，冷淡寡言，將深情藏於鋒利言語之後。常以「蠢貨」作為對林楰召的專屬稱呼。</p>
+      </div>
+      <div id="sima-modern" class="subsection">
+        <p>冷血動物研究專家與高校客座教授，完美主義、冷靜且理性。體溫偏低，手指冰冷，外表優雅但言語毒舌。</p>
+      </div>
+      <div id="sima-shan" class="subsection">
+        <p>山海奇都中的相柳族將領，掌控禁術之力，外冷內柔，始終守護著那個他口中「惹人煩」的女孩。</p>
+      </div>
+    </div>
+
+    <div id="char-lin" class="subsection">
+      <h3>林楰召</h3>
+      <div class="tabs">
+        <div class="tab active" data-world="lin-wei">架空魏晉風</div>
+        <div class="tab" data-world="lin-modern">現代AU</div>
+        <div class="tab" data-world="lin-shan">山海奇都</div>
+      </div>
+      <div id="lin-wei" class="subsection active">
+        <p>方醫出身，心思細膩、堅韌溫柔，對司馬懿的冷淡總以微笑回應。象徵花為石蓮花。</p>
+      </div>
+      <div id="lin-modern" class="subsection">
+        <p>中醫系學生，擅長藥理與醫術，善於察言觀色。總能在理性與感性之間找到平衡。</p>
+      </div>
+      <div id="lin-shan" class="subsection">
+        <p>文鰩魚族族人，靈性純淨，通曉海藥之道。她的歌聲能撫平異獸之怒，卻唯獨無法平息相柳的執念。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 代表物 -->
+  <section id="represent" class="view">
+    <h2>代表物</h2>
+    <div class="rep-section"><h4>司馬懿</h4><p>附子 🦉</p></div>
+    <div class="rep-section"><h4>林楰召</h4><p>百合 🌸</p></div>
+  </section>
+
+  <!-- 主線故事 -->
+  <section id="story" class="view">
+    <h2>主線故事</h2>
+    <div class="grid">
+      <div class="card" data-chapter="1"><h3>第一章</h3><p>命運齒輪轉動，初次相識的火花在微笑與拌嘴中誕生。</p></div>
+      <div class="card" data-chapter="2"><h3>第二章</h3><p>分離的陰影帶來思念與書信寄託的牽絆。</p></div>
+      <div class="card" data-chapter="3"><h3>第三章</h3><p>重逢的目光，讓所有未說的話都溢於言表。</p></div>
+      <div class="card" data-chapter="4"><h3>第四章</h3><p>守護與默契，危機中彼此承擔，情感逐漸堅固。</p></div>
+      <div class="card" data-chapter="5"><h3>第五章</h3><p>命運的終章，回顧過往的所有瞬間，心意不變。</p></div>
+    </div>
+  </section>
+
+  <!-- 主線章節分頁 -->
+  <section id="pa-1" class="view">
+    <h2>第一章</h2>
+    <p>命運齒輪轉動，初次相識的火花在微笑與拌嘴中誕生。</p>
+    <a href="#story" class="back-btn">返回主線故事</a>
+  </section>
+  <section id="pa-2" class="view">
+    <h2>第二章</h2>
+    <p>分離的陰影帶來思念與書信寄託的牽絆。</p>
+    <a href="#story" class="back-btn">返回主線故事</a>
+  </section>
+  <section id="pa-3" class="view">
+    <h2>第三章</h2>
+    <p>重逢的目光，讓所有未說的話都溢於言表。</p>
+    <a href="#story" class="back-btn">返回主線故事</a>
+  </section>
+  <section id="pa-4" class="view">
+    <h2>第四章</h2>
+    <p>守護與默契，危機中彼此承擔，情感逐漸堅固。</p>
+    <a href="#story" class="back-btn">返回主線故事</a>
+  </section>
+  <section id="pa-5" class="view">
+    <h2>第五章</h2>
+    <p>命運的終章，回顧過往的所有瞬間，心意不變。</p>
+    <a href="#story" class="back-btn">返回主線故事</a>
+  </section>
+
+  <!-- 各種PA首頁 -->
+  <section id="pas" class="view">
+    <h2>各種PA</h2>
+    <div class="grid">
+      <div class="card" data-pa="king"><h3>心動的王者</h3><p>現代競技場與羈絆的火花。</p></div>
+      <div class="card" data-pa="shan"><h3>山海奇都</h3><p>異獸與靈族的傳說世界。</p></div>
+      <div class="card" data-pa="magic"><h3>魔法世界</h3><p>魔力、契約與命運的試煉。</p></div>
+      <div class="card" data-pa="palace"><h3>宮廷</h3><p>權謀與愛慾交織的古代篇章。</p></div>
+    </div>
+  </section>
+
+  <!-- PA 個別分頁 -->
+  <section id="pa-king" class="view">
+    <h2>心動的王者</h2>
+    <p>現代競技場 AU，林楰召與司馬懿在隊伍中互動，賽場上是嚴苛導師，賽場下默默守護。</p>
+    <a href="#pas" class="back-btn">返回各種PA</a>
+  </section>
+  <section id="pa-shan" class="view">
+    <h2>山海奇都</h2>
+    <p>奇幻大陸 AU，林楰召為文鰩族藥師，司馬懿為相柳將領，彼此是宿命與救贖。</p>
+    <a href="#pas" class="back-btn">返回各種PA</a>
+  </section>
+  <section id="pa-magic" class="view">
+    <h2>魔法世界</h2>
+    <p>魔法學院 AU，林楰召為光系治癒魔法學生，司馬懿為黑魔法研究者，光與暗互補。</p>
+    <a href="#pas" class="back-btn">返回各種PA</a>
+  </section>
+  <section id="pa-palace" class="view">
+    <h2>宮廷</h2>
+    <p>古代帝國 AU，林楰召為醫女，司馬懿為權臣，一人救人一人謀權，命運交錯。</p>
+    <a href="#pas" class="back-btn">返回各種PA</a>
+  </section>
+
+  <!-- 圖片廊 -->
+  <section id="gallery" class="view">
+    <h2>圖片廊</h2>
+    <p>以下為預設展示圖片，可替換成你的插畫或截圖。</p>
+    <div class="grid">
+      <div class="card"><img src="https://placekitten.com/300/200" alt="示意圖1"></div>
+      <div class="card"><img src="https://placekitten.com/301/200" alt="示意圖2"></div>
+      <div class="card"><img src="https://placekitten.com/302/200" alt="示意圖3"></div>
+      <div class="card"><img src="https://placekitten.com/303/200" alt="示意圖4"></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox-overlay" aria-hidden="true">
+  <img src="" alt="放大圖片">
+</div>
+
+<script>
+  // 導覽列 & hash route
+  const navLinks = document.querySelectorAll('a[data-target]');
+  const views = document.querySelectorAll('.view');
+
+  function showView(target) {
+    views.forEach(v => v.style.display = v.id === target ? 'block' : 'none');
+    navLinks.forEach(a => a.classList.toggle('active', a.dataset.target === target));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function route() {
+    const hash = location.hash.replace('#', '') || 'home';
+    showView(hash);
+  }
+
+  window.addEventListener('hashchange', route);
+  route();
+
+  navLinks.forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      location.hash = a.dataset.target;
+    });
+  });
+
+  // 側邊欄開關
+  let sidebarOpen = false;
+  function toggleSidebar() {
+    const sidebar = document.getElementById("mySidebar");
+    const main = document.getElementById("mainContent");
+    const openBtn = document.querySelector('.open-btn');
+    if (!sidebarOpen) {
+      sidebar.style.width = "250px";
+      main.style.marginLeft = "250px";
+      sidebar.setAttribute('aria-hidden', 'false');
+      openBtn.setAttribute('aria-expanded', 'true');
+    } else {
+      sidebar.style.width = "0";
+      main.style.marginLeft = "0";
+      sidebar.setAttribute('aria-hidden', 'true');
+      openBtn.setAttribute('aria-expanded', 'false');
+    }
+    sidebarOpen = !sidebarOpen;
+  }
+
+  // 人物角色切換（主選單的角色 tab）
+  document.querySelectorAll('.tabs .tab[data-char]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // 移除同層角色 tab 的樣式
+      document.querySelectorAll('.tabs .tab[data-char]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('char-sima').style.display = btn.dataset.char === 'sima' ? 'block' : 'none';
+      document.getElementById('char-lin').style.display = btn.dataset.char === 'lin' ? 'block' : 'none';
+    });
+  });
+
+  // 司馬懿世界觀切換
+  document.querySelectorAll('#char-sima .tabs .tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('#char-sima .tabs .tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      ['sima-wei','sima-modern','sima-shan'].forEach(id => document.getElementById(id).classList.remove('active'));
+      // tab.dataset.world 為 wei|modern|shan
+      document.getElementById('sima-' + tab.dataset.world).classList.add('active');
+    });
+  });
+
+  // 林楰召世界觀切換
+  document.querySelectorAll('#char-lin .tabs .tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('#char-lin .tabs .tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      ['lin-wei','lin-modern','lin-shan'].forEach(id => document.getElementById(id).classList.remove('active'));
+      document.getElementById(tab.dataset.world).classList.add('active');
+    });
+  });
+
+  // 主線故事與PA卡片切換
+  document.querySelectorAll('#story .card').forEach(card => {
+    card.addEventListener('click', () => { location.hash = 'pa-' + card.dataset.chapter; });
+  });
+  document.querySelectorAll('#pas .card').forEach(card => {
+    card.addEventListener('click', () => { location.hash = 'pa-' + card.dataset.pa; });
+  });
+
+  // Lightbox 功能
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = lightbox.querySelector('img');
+
+  document.querySelectorAll('#gallery .card img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.style.display = 'flex';
+      lightbox.setAttribute('aria-hidden', 'false');
+    });
+  });
+
+  // 點擊背景或按Esc關閉 Lightbox
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) {
+      lightbox.style.display = 'none';
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      lightbox.style.display = 'none';
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+  });
+</script>
+
+</body>
+</html>
