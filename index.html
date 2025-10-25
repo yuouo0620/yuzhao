@@ -277,15 +277,23 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 </section>
 
 <!-- 圖片廊 -->
-<section id="gallery" class="view">
-  <h2>圖片廊</h2>
-  <div class="grid">
-    <div class="card"><img src="痛苦唸書.PNG" alt="痛苦唸書" height="100"></div>
-    <div class="card"><img src="https://placekitten.com/301/200" alt="示意圖2"></div>
-    <div class="card"><img src="https://placekitten.com/302/200" alt="示意圖3"></div>
-    <div class="card"><img src="https://placekitten.com/303/200" alt="示意圖4"></div>
+<!-- 圖片獨立頁面 -->
+<section id="img-1" class="view">
+  <h2>痛苦唸書</h2>
+  <img src="痛苦唸書.PNG" alt="痛苦唸書" style="max-width:100%;">
+  <div class="pa-nav">
+    <a href="#gallery" class="back-btn">返回圖片廊</a>
   </div>
 </section>
+
+<section id="img-2" class="view">
+  <h2>示意圖2</h2>
+  <img src="https://placekitten.com/301/200" alt="示意圖2" style="max-width:100%;">
+  <div class="pa-nav">
+    <a href="#gallery" class="back-btn">返回圖片廊</a>
+  </div>
+</section>
+
 
 <!-- Lightbox Overlay -->
 <div id="lightbox" class="lightbox-overlay">
@@ -419,19 +427,27 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 
   // ===== 圖片 Lightbox =====
   const lightbox = document.getElementById('lightbox');
-  const lightboxImg = lightbox.querySelector('img');
-  document.querySelectorAll('#gallery .card img').forEach(img=>{
-    img.addEventListener('click', ()=> {
-      lightboxImg.src = img.src;
-      lightbox.style.display='flex';
-    });
+const lightboxImg = lightbox.querySelector('img');
+
+document.querySelectorAll('#gallery .card img').forEach((img, index)=>{
+  const imgId = 'img-' + (index + 1); // 每張圖片獨立頁面 ID
+  img.addEventListener('click', ()=> {
+    // Lightbox 放大
+    lightboxImg.src = img.src;
+    lightbox.style.display='flex';
+    // 跳轉到獨立頁面
+    location.hash = imgId;
   });
-  lightbox.addEventListener('click', e=>{
-    if(e.target===lightbox) lightbox.style.display='none';
-  });
-  document.addEventListener('keydown', e=>{
-    if(e.key==='Escape') lightbox.style.display='none';
-  });
+});
+
+lightbox.addEventListener('click', e=>{
+  if(e.target===lightbox) lightbox.style.display='none';
+});
+
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape') lightbox.style.display='none';
+});
+
 </script>
 </div>
 </body>
