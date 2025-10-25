@@ -107,7 +107,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   <a href="#home" data-target="home">首頁</a>
   <a href="#characters" data-target="characters">人物介紹</a>
   <a href="#story" data-target="story">主線故事</a>
-  <a href="#pas" data-target="pas">各種PA</a>
+  <a href="#pas" data-target="pas">各種世界線</a>
   <a href="#gallery" data-target="gallery">圖片廊</a>
   <a href="#represent" data-target="represent">代表物</a>
 </div>
@@ -194,8 +194,9 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     <p>內容</p>
     <div class="pa-nav">
       <a href="#" class="back-btn" onclick="prevChapter(event)">上一章</a>
+      <a href="#story" class="back-btn">目錄</a>
       <a href="#" class="back-btn" onclick="nextChapter(event)">下一章</a>
-      <a href="#story" class="back-btn">返回主線故事</a>
+      
     </div>
   </section>
   <section id="pa-2" class="view">
@@ -203,8 +204,8 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     <p>內容</p>
     <div class="pa-nav">
       <a href="#" class="back-btn" onclick="prevChapter(event)">上一章</a>
+      <a href="#story" class="back-btn">目錄</a>
       <a href="#" class="back-btn" onclick="nextChapter(event)">下一章</a>
-      <a href="#story" class="back-btn">返回主線故事</a>
     </div>
   </section>
   <section id="pa-3" class="view">
@@ -212,8 +213,8 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     <p>內容</p>
     <div class="pa-nav">
       <a href="#" class="back-btn" onclick="prevChapter(event)">上一章</a>
+      <a href="#story" class="back-btn">目錄</a>
       <a href="#" class="back-btn" onclick="nextChapter(event)">下一章</a>
-      <a href="#story" class="back-btn">返回主線故事</a>
     </div>
   </section>
   <section id="pa-4" class="view">
@@ -221,8 +222,8 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     <p>內容</p>
     <div class="pa-nav">
       <a href="#" class="back-btn" onclick="prevChapter(event)">上一章</a>
+      <a href="#story" class="back-btn">目錄</a>
       <a href="#" class="back-btn" onclick="nextChapter(event)">下一章</a>
-      <a href="#story" class="back-btn">返回主線故事</a>
     </div>
   </section>
   <section id="pa-5" class="view">
@@ -230,8 +231,8 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     <p>內容</p>
     <div class="pa-nav">
       <a href="#" class="back-btn" onclick="prevChapter(event)">上一章</a>
+      <a href="#story" class="back-btn">目錄</a>
       <a href="#" class="back-btn" onclick="nextChapter(event)">下一章</a>
-      <a href="#story" class="back-btn">返回主線故事</a>
     </div>
   </section>
 
@@ -283,25 +284,25 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   <section id="pa-king" class="view">
     <h2>心動的王者 - 章節列表</h2>
     <div class="grid"></div>
-    <a href="#pas" class="back-btn">返回各種PA</a>
+    <a href="#pas" class="back-btn">其他世界線</a>
   </section>
   <section id="pa-shan" class="view">
     <h2>山海奇都 - 章節列表</h2>
     <div class="grid"></div>
-    <a href="#pas" class="back-btn">返回各種PA</a>
+    <a href="#pas" class="back-btn">其他世界線</a>
   </section>
   <section id="pa-magic" class="view">
     <h2>魔法世界 - 章節列表</h2>
     <div class="grid"></div>
-    <a href="#pas" class="back-btn">返回各種PA</a>
+    <a href="#pas" class="back-btn">其他世界線</a>
   </section>
   <section id="pa-palace" class="view">
     <h2>？ - 章節列表</h2>
     <div class="grid"></div>
-    <a href="#pas" class="back-btn">返回各種PA</a>
+    <a href="#pas" class="back-btn">其他世界線</a>
   </section>
 
-  <!-- 範例章節內容頁 (心動的王者) -->
+  <!-- 章節內容頁 (心動的王者) -->
   <section id="pa-king-1" class="view">
     <h2>心動的王者 - 章節1</h2>
     <p>內容</p>
@@ -486,6 +487,21 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
       location.hash = 'pa-'+pa;
     });
   });
+  // 當 hash 改變時，顯示對應章節、隱藏其他
+window.addEventListener('hashchange', showSectionFromHash);
+window.addEventListener('DOMContentLoaded', showSectionFromHash);
+
+function showSectionFromHash(){
+  const current = location.hash.replace('#','');
+  document.querySelectorAll('section.view').forEach(sec=>{
+    if(sec.id === current){
+      sec.style.display = 'block';
+    } else {
+      sec.style.display = 'none';
+    }
+  });
+}
+
 </script>
 
 
