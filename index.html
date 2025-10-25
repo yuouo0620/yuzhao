@@ -16,7 +16,7 @@ body {
   margin:0; 
   font-family:'Noto Sans TC',sans-serif; 
   display:flex; 
-  height:100vh; 
+  min-height:100vh; 
   overflow-x:hidden;
   text-align:center;
   background: #fafafa;
@@ -35,6 +35,7 @@ body {
   display:flex; 
   flex-direction:column; 
   align-items:center;
+  z-index: 200;
 }
 .sidebar img {margin-top:20px; width:80px; height:80px; border-radius:50%;}
 .sidebar h2 {margin:10px 0 20px; color: var(--primary-color);}
@@ -107,6 +108,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 </style>
 </head>
 <body>
+  
 <!-- 側邊欄 -->
 <div id="mySidebar" class="sidebar">
   <img src="圖標.PNG" alt="Logo">
@@ -128,7 +130,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   <!-- 首頁 -->
   <section id="home" class="view">
     <h1>首頁</h1>
-    <p>內容</p>
+    <p>歡迎來到「懿生楰你」網站！</p>
   </section>
 
   <!-- 人物介紹 -->
@@ -204,6 +206,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
       <div class="card"><img src="示意圖4.PNG" alt="示意圖4" class="gallery-img" data-story="4" height="200"></div>
     </div>
   </section>
+
   <!-- 圖片獨立故事頁面 -->
   <section id="gallery-story-1" class="view">
     <h2>痛苦唸書</h2>
@@ -237,157 +240,6 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   <div class="lightbox-overlay" id="lightbox">
     <img src="" alt="放大圖片">
   </div>
-<script>
-/* 側邊欄開關 */
-let sidebarOpen = false;
-function toggleSidebar() {
-  const sidebar = document.getElementById("mySidebar");
-  const main = document.getElementById("mainContent");
-  if(!sidebarOpen){
-    sidebar.style.width="250px";
-    main.style.marginLeft="250px";
-  } else {
-    sidebar.style.width="0";
-    main.style.marginLeft="0";
-  }
-  sidebarOpen=!sidebarOpen;
-}
-
-/* sidebar 導覽 hash (首頁 / 人物 / 主線 / 世界線列表 / 圖片廊 / 代表物) */
-const navLinks = document.querySelectorAll('a[data-target]');
-const mainViews = ['home','characters','story','pas','gallery','represent'];
-
-function showSidebarView(target){
-  if(mainViews.includes(target)){
-    document.querySelectorAll('section.view').forEach(sec=>{
-      if(mainViews.includes(sec.id)){
-        sec.style.display = (sec.id===target)?'block':'none';
-      }
-    });
-  }
-}
-
-navLinks.forEach(a=>{
-  a.addEventListener('click', e=>{
-    e.preventDefault();
-    location.hash = a.dataset.target;
-  });
-});
-
-/* hashchange 事件 */
-function handleHashChange(){
-  const hash = location.hash.replace('#','') || 'home';
-
-  // sidebar 導覽
-  if(mainViews.includes(hash)){
-    showSidebarView(hash);
-  }
-
-  // 顯示章節或圖片故事頁
-  document.querySelectorAll('section.view').forEach(sec=>{
-    // hash 等於 section.id 且不是 sidebar 導覽頁面
-    if(!mainViews.includes(sec.id)){
-      sec.style.display = (sec.id===hash)?'block':'none';
-    }
-  });
-}
-
-window.addEventListener('hashchange', handleHashChange);
-window.addEventListener('DOMContentLoaded', handleHashChange);
-
-/* 人物角色切換 */
-document.querySelectorAll('.tabs .tab[data-char]').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.tabs .tab[data-char]').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('char-sima').style.display=btn.dataset.char==='sima'?'block':'none';
-    document.getElementById('char-lin').style.display=btn.dataset.char==='lin'?'block':'none';
-  });
-});
-
-/* 人物世界觀切換 */
-document.querySelectorAll('#char-sima .tabs .tab').forEach(tab=>{
-  tab.addEventListener('click', ()=>{
-    document.querySelectorAll('#char-sima .tabs .tab').forEach(t=>t.classList.remove('active'));
-    tab.classList.add('active');
-    ['sima-wei','sima-modern','sima-shan'].forEach(id=>document.getElementById(id).classList.remove('active'));
-    document.getElementById('sima-'+tab.dataset.world).classList.add('active');
-  });
-});
-document.querySelectorAll('#char-lin .tabs .tab').forEach(tab=>{
-  tab.addEventListener('click', ()=>{
-    document.querySelectorAll('#char-lin .tabs .tab').forEach(t=>t.classList.remove('active'));
-    tab.classList.add('active');
-    ['lin-wei','lin-modern','lin-shan'].forEach(id=>document.getElementById(id).classList.remove('active'));
-    document.getElementById(tab.dataset.world).classList.add('active');
-  });
-});
-
-/* 主線章節控制 */
-const mainChapters = ['pa-1','pa-2','pa-3','pa-4','pa-5'];
-function nextChapter(e){
-  e.preventDefault();
-  const current = location.hash.replace('#','');
-  const idx = mainChapters.indexOf(current);
-  if(idx>=0 && idx<mainChapters.length-1) location.hash = mainChapters[idx+1];
-}
-function prevChapter(e){
-  e.preventDefault();
-  const current = location.hash.replace('#','');
-  const idx = mainChapters.indexOf(current);
-  if(idx>0) location.hash = mainChapters[idx-1];
-}
-document.querySelectorAll('#story .card').forEach(card=>{
-  card.addEventListener('click', ()=>location.hash = 'pa-' + card.dataset.chapter);
-});
-
-/* 世界線章節控制 */
-const paChapters = {
-  king: ['pa-king-1','pa-king-2','pa-king-3'],
-  shan: ['pa-shan-1','pa-shan-2','pa-shan-3'],
-  magic: ['pa-magic-1','pa-magic-2','pa-magic-3'],
-  palace: ['pa-palace-1','pa-palace-2','pa-palace-3']
-};
-function nextPAChapter(pa){
-  const current = location.hash.replace('#','');
-  const idx = paChapters[pa].indexOf(current);
-  if(idx>=0 && idx<paChapters[pa].length-1) location.hash = paChapters[pa][idx+1];
-}
-function prevPAChapter(pa){
-  const current = location.hash.replace('#','');
-  const idx = paChapters[pa].indexOf(current);
-  if(idx>0) location.hash = paChapters[pa][idx-1];
-}
-
-/* 世界線選單跳轉 */
-document.querySelectorAll('#pas .card').forEach(card=>{
-  card.addEventListener('click', ()=>{
-    const pa = card.dataset.pa;
-    location.hash = 'pa-' + pa; // 先跳到章節列表
-  });
-});
-
-/* 圖片廊點圖片跳轉到獨立頁 */
-document.querySelectorAll('.gallery-img').forEach(img=>{
-  img.addEventListener('click', ()=>{
-    const storyId = 'gallery-story-' + img.dataset.story;
-    location.hash = storyId;
-  });
-});
-
-/* Lightbox 全站共用 */
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = lightbox.querySelector('img');
-document.querySelectorAll('.lightbox-img').forEach(img=>{
-  img.addEventListener('click', ()=>{
-    lightboxImg.src = img.src;
-    lightbox.style.display='flex';
-  });
-});
-lightbox.addEventListener('click', e=>{ if(e.target===lightbox) lightbox.style.display='none'; });
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') lightbox.style.display='none'; });
-</script>
-
 <!-- 主線章節 -->
 <section id="pa-1" class="view">
   <h2>第一章</h2>
@@ -439,130 +291,179 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape') lightbox.style.di
   </div>
 </section>
 
-<!-- 世界線章節範例：心動的王者 -->
-<section id="pa-king-1" class="view">
-  <h2>心動的王者 - 章節1</h2>
-  <p>內容1</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevPAChapter('king')">上一章</a>
-    <a href="#" class="back-btn" onclick="nextPAChapter('king')">下一章</a>
-    <a href="#pa-king" class="back-btn">返回章節列表</a>
-  </div>
+<!-- 世界線章節列表容器 -->
+<section id="pa-king" class="view">
+  <h2>心動的王者 - 章節列表</h2>
+  <div class="grid"></div>
+  <a href="#pas" class="back-btn">返回首頁</a>
 </section>
-
-<section id="pa-king-2" class="view">
-  <h2>心動的王者 - 章節2</h2>
-  <p>內容2</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevPAChapter('king')">上一章</a>
-    <a href="#" class="back-btn" onclick="nextPAChapter('king')">下一章</a>
-    <a href="#pa-king" class="back-btn">返回章節列表</a>
-  </div>
+<section id="pa-shan" class="view">
+  <h2>山海奇都 - 章節列表</h2>
+  <div class="grid"></div>
+  <a href="#pas" class="back-btn">返回首頁</a>
 </section>
-
-<section id="pa-king-3" class="view">
-  <h2>心動的王者 - 章節3</h2>
-  <p>內容3</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevPAChapter('king')">上一章</a>
-    <a href="#" class="back-btn" onclick="nextPAChapter('king')">下一章</a>
-    <a href="#pa-king" class="back-btn">返回章節列表</a>
-  </div>
+<section id="pa-magic" class="view">
+  <h2>魔法世界 - 章節列表</h2>
+  <div class="grid"></div>
+  <a href="#pas" class="back-btn">返回首頁</a>
 </section>
-
-<!-- 山海奇都 -->
-<section id="pa-shan-1" class="view">
-  <h2>山海奇都 - 章節1</h2>
-  <p>內容1</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevPAChapter('shan')">上一章</a>
-    <a href="#" class="back-btn" onclick="nextPAChapter('shan')">下一章</a>
-    <a href="#pa-shan" class="back-btn">返回章節列表</a>
-  </div>
+<section id="pa-palace" class="view">
+  <h2>宮廷 - 章節列表</h2>
+  <div class="grid"></div>
+  <a href="#pas" class="back-btn">返回首頁</a>
 </section>
+<script>
+// 側邊欄開關
+let sidebarOpen = false;
+function toggleSidebar() {
+  const sidebar = document.getElementById("mySidebar");
+  const main = document.getElementById("mainContent");
+  if(!sidebarOpen){
+    sidebar.style.width="250px";
+    main.style.marginLeft="250px";
+  } else {
+    sidebar.style.width="0";
+    main.style.marginLeft="0";
+  }
+  sidebarOpen=!sidebarOpen;
+}
 
-<section id="pa-shan-2" class="view">
-  <h2>山海奇都 - 章節2</h2>
-  <p>內容2</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevPAChapter('shan')">上一章</a>
-    <a href="#" class="back-btn" onclick="nextPAChapter('shan')">下一章</a>
-    <a href="#pa-shan" class="back-btn">返回章節列表</a>
-  </div>
-</section>
+// sidebar 導覽
+const navLinks = document.querySelectorAll('a[data-target]');
+const mainViews = ['home','characters','story','pas','gallery','represent'];
+navLinks.forEach(a=>{
+  a.addEventListener('click', e=>{
+    e.preventDefault();
+    location.hash = a.dataset.target;
+  });
+});
 
-<section id="pa-shan-3" class="view">
-  <h2>山海奇都 - 章節3</h2>
-  <p>內容3</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevPAChapter('shan')">上一章</a>
-    <a href="#" class="back-btn" onclick="nextPAChapter('shan')">下一章</a>
-    <a href="#pa-shan" class="back-btn">返回章節列表</a>
-  </div>
-</section>
+// hash 變化處理
+function handleHashChange(){
+  const hash = location.hash.replace('#','') || 'home';
 
-<!-- 魔法世界 -->
-<section id="pa-magic-1" class="view">
-  <h2>魔法世界 - 章節1</h2>
-  <p>內容1</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevPAChapter('magic')">上一章</a>
-    <a href="#" class="back-btn" onclick="nextPAChapter('magic')">下一章</a>
-    <a href="#pa-magic" class="back-btn">返回章節列表</a>
-  </div>
-</section>
+  // sidebar 導覽頁面顯示
+  if(mainViews.includes(hash)){
+    mainViews.forEach(v=>{
+      document.getElementById(v).style.display = (v===hash)?'block':'none';
+    });
+  }
 
-<section id="pa-magic-2" class="view">
-  <h2>魔法世界 - 章節2</h2>
-  <p>內容2</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevPAChapter('magic')">上一章</a>
-    <a href="#" class="back-btn" onclick="nextPAChapter('magic')">下一章</a>
-    <a href="#pa-magic" class="back-btn">返回章節列表</a>
-  </div>
-</section>
+  // 章節或圖片故事頁顯示
+  document.querySelectorAll('section.view').forEach(sec=>{
+    if(!mainViews.includes(sec.id)){
+      sec.style.display = (sec.id===hash)?'block':'none';
+    }
+  });
+}
+window.addEventListener('hashchange', handleHashChange);
+window.addEventListener('DOMContentLoaded', handleHashChange);
 
-<section id="pa-magic-3" class="view">
-  <h2>魔法世界 - 章節3</h2>
-  <p>內容3</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevPAChapter('magic')">上一章</a>
-    <a href="#" class="back-btn" onclick="nextPAChapter('magic')">下一章</a>
-    <a href="#pa-magic" class="back-btn">返回章節列表</a>
-  </div>
-</section>
+// 人物切換
+document.querySelectorAll('.tabs .tab[data-char]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tabs .tab[data-char]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('char-sima').style.display=btn.dataset.char==='sima'?'block':'none';
+    document.getElementById('char-lin').style.display=btn.dataset.char==='lin'?'block':'none';
+  });
+});
 
-<!-- 宮廷 -->
-<section id="pa-palace-1" class="view">
-  <h2>宮廷 - 章節1</h2>
-  <p>內容1</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevPAChapter('palace')">上一章</a>
-    <a href="#" class="back-btn" onclick="nextPAChapter('palace')">下一章</a>
-    <a href="#pa-palace" class="back-btn">返回章節列表</a>
-  </div>
-</section>
+// 人物世界觀切換
+document.querySelectorAll('#char-sima .tabs .tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('#char-sima .tabs .tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    ['sima-wei','sima-modern','sima-shan'].forEach(id=>document.getElementById(id).classList.remove('active'));
+    document.getElementById('sima-'+tab.dataset.world).classList.add('active');
+  });
+});
+document.querySelectorAll('#char-lin .tabs .tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('#char-lin .tabs .tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    ['lin-wei','lin-modern','lin-shan'].forEach(id=>document.getElementById(id).classList.remove('active'));
+    document.getElementById(tab.dataset.world).classList.add('active');
+  });
+});
 
-<section id="pa-palace-2" class="view">
-  <h2>宮廷 - 章節2</h2>
-  <p>內容2</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevPAChapter('palace')">上一章</a>
-    <a href="#" class="back-btn" onclick="nextPAChapter('palace')">下一章</a>
-    <a href="#pa-palace" class="back-btn">返回章節列表</a>
-  </div>
-</section>
+// 主線章節控制
+const mainChapters = ['pa-1','pa-2','pa-3','pa-4','pa-5'];
+function nextChapter(e){
+  e.preventDefault();
+  const current = location.hash.replace('#','');
+  const idx = mainChapters.indexOf(current);
+  if(idx>=0 && idx<mainChapters.length-1) location.hash = mainChapters[idx+1];
+}
+function prevChapter(e){
+  e.preventDefault();
+  const current = location.hash.replace('#','');
+  const idx = mainChapters.indexOf(current);
+  if(idx>0) location.hash = mainChapters[idx-1];
+}
+document.querySelectorAll('#story .card').forEach(card=>{
+  card.addEventListener('click', ()=>location.hash = 'pa-' + card.dataset.chapter);
+});
 
-<section id="pa-palace-3" class="view">
-  <h2>宮廷 - 章節3</h2>
-  <p>內容3</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevPAChapter('palace')">上一章</a>
-    <a href="#" class="back-btn" onclick="nextPAChapter('palace')">下一章</a>
-    <a href="#pa-palace" class="back-btn">返回章節列表</a>
-  </div>
-</section>
+// 世界線章節控制
+const paChapters = {
+  king: ['pa-king-1','pa-king-2','pa-king-3'],
+  shan: ['pa-shan-1','pa-shan-2','pa-shan-3'],
+  magic: ['pa-magic-1','pa-magic-2','pa-magic-3'],
+  palace: ['pa-palace-1','pa-palace-2','pa-palace-3']
+};
 
-</div> <!-- main 結束 -->
+// 動態生成世界線章節列表
+Object.keys(paChapters).forEach(pa=>{
+  const grid = document.querySelector(`#pa-${pa} .grid`);
+  paChapters[pa].forEach(ch=>{
+    const card = document.createElement('div');
+    card.className='card';
+    card.textContent=ch.replace(`pa-${pa}-`,'章節');
+    card.addEventListener('click', ()=> location.hash = ch);
+    grid.appendChild(card);
+  });
+});
+
+function nextPAChapter(pa){
+  const current = location.hash.replace('#','');
+  const idx = paChapters[pa].indexOf(current);
+  if(idx>=0 && idx<paChapters[pa].length-1) location.hash = paChapters[pa][idx+1];
+}
+function prevPAChapter(pa){
+  const current = location.hash.replace('#','');
+  const idx = paChapters[pa].indexOf(current);
+  if(idx>0) location.hash = paChapters[pa][idx-1];
+}
+
+// 世界線選單跳轉到章節列表
+document.querySelectorAll('#pas .card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    const pa = card.dataset.pa;
+    location.hash = 'pa-' + pa;
+  });
+});
+
+// 圖片廊跳轉到獨立故事頁
+document.querySelectorAll('.gallery-img').forEach(img=>{
+  img.addEventListener('click', ()=>{
+    const storyId = 'gallery-story-' + img.dataset.story;
+    location.hash = storyId;
+  });
+});
+
+// Lightbox 全站共用
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+document.querySelectorAll('.lightbox-img').forEach(img=>{
+  img.addEventListener('click', ()=>{
+    lightboxImg.src = img.src;
+    lightbox.style.display='flex';
+  });
+});
+lightbox.addEventListener('click', e=>{ if(e.target===lightbox) lightbox.style.display='none'; });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') lightbox.style.display='none'; });
+</script>
+</div>
 </body>
 </html>
