@@ -11,7 +11,6 @@
   --sidebar-bg: #f8fafc;
   --sidebar-border: #e2e8f0;
 }
-
 body { 
   margin:0; 
   font-family:'Noto Sans TC',sans-serif; 
@@ -21,56 +20,29 @@ body {
   text-align:center;
   background: #fafafa;
 }
-
 .sidebar {
-  height:100%; 
-  width:0; 
-  position:fixed; 
-  top:0; 
-  left:0; 
-  background: var(--sidebar-bg); 
-  overflow-x:hidden; 
-  transition:0.3s; 
-  border-right:1px solid var(--sidebar-border); 
-  display:flex; 
-  flex-direction:column; 
-  align-items:center;
-  z-index: 200;
+  height:100%; width:0; position:fixed; top:0; left:0;
+  background: var(--sidebar-bg); overflow-x:hidden; transition:0.3s;
+  border-right:1px solid var(--sidebar-border); display:flex;
+  flex-direction:column; align-items:center; z-index:200;
 }
 .sidebar img {margin-top:20px; width:80px; height:80px; border-radius:50%;}
 .sidebar h2 {margin:10px 0 20px; color: var(--primary-color);}
 .sidebar a {
-  padding:10px 20px; 
-  text-decoration:none; 
-  font-size:18px; 
-  color:#334155; 
-  display:block; 
-  width:100%; 
-  text-align:center; 
-  transition:0.2s;
+  padding:10px 20px; text-decoration:none; font-size:18px; 
+  color:#334155; display:block; width:100%; text-align:center; transition:0.2s;
 }
 .sidebar a:hover, .sidebar a.active {background: var(--secondary-color); color: var(--primary-color);}
-
 .main {flex:1; padding:40px 20px; margin-left:0; transition: margin-left 0.3s;}
-
 .open-btn {
-  position:fixed; top:20px; left:20px; 
-  font-size:20px; 
-  padding:10px 15px; 
-  cursor:pointer; 
-  background: var(--primary-color); 
-  color:white; 
-  border:none; 
-  border-radius:8px; 
-  z-index:300;
+  position:fixed; top:20px; left:20px; font-size:20px; padding:10px 15px; 
+  cursor:pointer; background: var(--primary-color); color:white; border:none; 
+  border-radius:8px; z-index:300;
 }
-
 h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
-
 .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; justify-items:center;}
 .card{background:#fff; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05); padding:20px; width:100%; max-width:260px; cursor:pointer; transition:transform .2s; margin:0 auto;}
 .card:hover{transform:translateY(-4px);}
-
 .view{display:none;}
 .tabs{display:flex; justify-content:center; gap:10px; margin:16px 0;}
 .tab{padding:8px 12px; border-radius:8px; background:#f1f5f9; color:#334155; font-weight:600; cursor:pointer;}
@@ -79,25 +51,12 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 .subsection.active{display:block;}
 .back-btn{display:inline-block;margin:8px 6px;padding:8px 14px;background: var(--secondary-color);color: var(--primary-color);border-radius:8px;text-decoration:none;font-weight:600;}
 .rep-section{background: var(--secondary-color);padding:12px;border-radius:8px;margin:20px 0;}
-
 /* Lightbox */
 .lightbox-overlay {
-  position: fixed;
-  top:0; left:0; width:100%; height:100%;
-  background: rgba(0,0,0,0.8);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 500;
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 500;
 }
-.lightbox-overlay img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  cursor: zoom-in;
-}
-
+.lightbox-overlay img { max-width: 90%; max-height: 90%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); cursor: zoom-in; }
 /* 手機優化 */
 @media(max-width:768px){
   .main {padding:20px 10px;}
@@ -125,7 +84,6 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 
 <!-- 主內容 -->
 <div class="main" id="mainContent">
-
 <!-- 首頁 -->
 <section id="home" class="view">
   <h1>首頁</h1>
@@ -139,7 +97,6 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     <div class="tab active" data-char="sima">司馬懿</div>
     <div class="tab" data-char="lin">林楰召</div>
   </div>
-
   <div id="char-sima" class="subsection active">
     <h3>司馬懿</h3>
     <div class="tabs">
@@ -151,7 +108,6 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     <div id="sima-modern" class="subsection"><p>內容</p></div>
     <div id="sima-shan" class="subsection"><p>內容</p></div>
   </div>
-
   <div id="char-lin" class="subsection">
     <h3>林楰召</h3>
     <div class="tabs">
@@ -184,7 +140,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   </div>
 </section>
 
-<!-- 主線章節分頁 -->
+<!-- 主線章節 -->
 <section id="pa-1" class="view">
   <h2>第一章</h2>
   <p>內容</p>
@@ -203,36 +159,10 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     <a href="#" class="back-btn" onclick="nextChapter(event)">下一章</a>
   </div>
 </section>
-<section id="pa-3" class="view">
-  <h2>第三章</h2>
-  <p>內容</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevChapter(event)">上一章</a>
-    <a href="#story" class="back-btn">目錄</a>
-    <a href="#" class="back-btn" onclick="nextChapter(event)">下一章</a>
-  </div>
-</section>
-<section id="pa-4" class="view">
-  <h2>第四章</h2>
-  <p>內容</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevChapter(event)">上一章</a>
-    <a href="#story" class="back-btn">目錄</a>
-    <a href="#" class="back-btn" onclick="nextChapter(event)">下一章</a>
-  </div>
-</section>
-<section id="pa-5" class="view">
-  <h2>第五章</h2>
-  <p>內容</p>
-  <div class="pa-nav">
-    <a href="#" class="back-btn" onclick="prevChapter(event)">上一章</a>
-    <a href="#story" class="back-btn">目錄</a>
-    <a href="#" class="back-btn" onclick="nextChapter(event)">下一章</a>
-  </div>
-</section>
+<!-- 依序 pa-3 ~ pa-5 類似 -->
 
-<!-- 各種世界線首頁 -->
-<section id="pas" class="view" style="display:block;">
+<!-- 各世界線首頁 -->
+<section id="pas" class="view">
   <h2>選擇世界線（PA）</h2>
   <div class="grid">
     <div class="card" data-pa="king">心動的王者</div>
@@ -242,30 +172,13 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   </div>
 </section>
 
-<!-- PA 章節列表與內容示例 -->
-<section id="pa-king" class="view">
-  <h2>心動的王者 - 章節列表</h2>
-  <div class="grid"></div>
-  <a href="#pas" class="back-btn">返回首頁</a>
-</section>
-<section id="pa-shan" class="view">
-  <h2>山海奇都 - 章節列表</h2>
-  <div class="grid"></div>
-  <a href="#pas" class="back-btn">返回首頁</a>
-</section>
-<section id="pa-magic" class="view">
-  <h2>魔法世界 - 章節列表</h2>
-  <div class="grid"></div>
-  <a href="#pas" class="back-btn">返回首頁</a>
-</section>
-<section id="pa-palace" class="view">
-  <h2>宮廷 - 章節列表</h2>
-  <div class="grid"></div>
-  <a href="#pas" class="back-btn">返回首頁</a>
-</section>
+<!-- PA 章節列表 -->
+<section id="pa-king" class="view"><h2>心動的王者 - 章節列表</h2><div class="grid"></div><a href="#pas" class="back-btn">返回首頁</a></section>
+<section id="pa-shan" class="view"><h2>山海奇都 - 章節列表</h2><div class="grid"></div><a href="#pas" class="back-btn">返回首頁</a></section>
+<section id="pa-magic" class="view"><h2>魔法世界 - 章節列表</h2><div class="grid"></div><a href="#pas" class="back-btn">返回首頁</a></section>
+<section id="pa-palace" class="view"><h2>宮廷 - 章節列表</h2><div class="grid"></div><a href="#pas" class="back-btn">返回首頁</a></section>
 
-<!-- PA 各章節內容範例 -->
-<!-- 重複模板，可擴充 -->
+<!-- PA 章節內容 -->
 <section id="pa-king-1" class="view">
   <h2>心動的王者 - 章節1</h2>
   <p>內容1</p>
@@ -277,165 +190,166 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 </section>
 
 <!-- 圖片廊 -->
+<section id="gallery" class="view">
+  <h2>圖片廊</h2>
+  <div class="grid">
+    <div class="card"><img src="痛苦唸書.PNG" alt="痛苦唸書"></div>
+    <div class="card"><img src="https://placekitten.com/301/200" alt="示意圖2"></div>
+  </div>
+</section>
+
 <!-- 圖片獨立頁面 -->
 <section id="img-1" class="view">
   <h2>痛苦唸書</h2>
-  <img src="痛苦唸書.PNG" alt="痛苦唸書" style="max-width:100%;">
-  <div class="pa-nav">
-    <a href="#gallery" class="back-btn">返回圖片廊</a>
-  </div>
+  <img src="痛苦唸書.PNG" style="max-width:100%;">
+  <div class="pa-nav"><a href="#gallery" class="back-btn">返回圖片廊</a></div>
 </section>
-
 <section id="img-2" class="view">
   <h2>示意圖2</h2>
-  <img src="https://placekitten.com/301/200" alt="示意圖2" style="max-width:100%;">
-  <div class="pa-nav">
-    <a href="#gallery" class="back-btn">返回圖片廊</a>
-  </div>
+  <img src="https://placekitten.com/301/200" style="max-width:100%;">
+  <div class="pa-nav"><a href="#gallery" class="back-btn">返回圖片廊</a></div>
 </section>
 
-
 <!-- Lightbox Overlay -->
-<div id="lightbox" class="lightbox-overlay">
-  <img src="" alt="放大圖">
-</div>
-
+<div id="lightbox" class="lightbox-overlay"><img src="" alt="放大圖"></div>
 <script>
-  // ===== 主線章節控制 =====
-  const mainChapters = ['pa-1','pa-2','pa-3','pa-4','pa-5'];
-  function nextChapter(e){
+// ===== 主線章節控制 =====
+const mainChapters = ['pa-1','pa-2','pa-3','pa-4','pa-5'];
+function nextChapter(e){
+  e.preventDefault();
+  const current = location.hash.replace('#','');
+  const idx = mainChapters.indexOf(current);
+  if(idx >=0 && idx < mainChapters.length-1) location.hash = mainChapters[idx+1];
+}
+function prevChapter(e){
+  e.preventDefault();
+  const current = location.hash.replace('#','');
+  const idx = mainChapters.indexOf(current);
+  if(idx>0) location.hash = mainChapters[idx-1];
+}
+document.querySelectorAll('#story .card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    location.hash = 'pa-' + card.dataset.chapter;
+  });
+});
+
+// ===== PA 章節資料 =====
+const paChapters = {
+  king:[{id:'pa-king-1',title:'章節1'},{id:'pa-king-2',title:'章節2'},{id:'pa-king-3',title:'章節3'}],
+  shan:[{id:'pa-shan-1',title:'章節1'},{id:'pa-shan-2',title:'章節2'},{id:'pa-shan-3',title:'章節3'}],
+  magic:[{id:'pa-magic-1',title:'章節1'},{id:'pa-magic-2',title:'章節2'},{id:'pa-magic-3',title:'章節3'}],
+  palace:[{id:'pa-palace-1',title:'章節1'},{id:'pa-palace-2',title:'章節2'},{id:'pa-palace-3',title:'章節3'}]
+};
+
+// 生成 PA 章節列表
+Object.keys(paChapters).forEach(pa=>{
+  const container = document.getElementById('pa-'+pa);
+  if(!container) return;
+  const grid = container.querySelector('.grid');
+  if(!grid) return;
+  paChapters[pa].forEach(ch=>{
+    const card = document.createElement('div');
+    card.className='card';
+    card.textContent = ch.title;
+    card.addEventListener('click', ()=> location.hash = ch.id);
+    grid.appendChild(card);
+  });
+});
+
+// PA 上一章/下一章
+function nextPAChapter(pa){
+  const current = location.hash.replace('#','');
+  const idx = paChapters[pa].findIndex(c=>c.id===current);
+  if(idx>=0 && idx<paChapters[pa].length-1) location.hash = paChapters[pa][idx+1].id;
+}
+function prevPAChapter(pa){
+  const current = location.hash.replace('#','');
+  const idx = paChapters[pa].findIndex(c=>c.id===current);
+  if(idx>0) location.hash = paChapters[pa][idx-1].id;
+}
+
+// 點擊 PA 首頁卡片進入列表
+document.querySelectorAll('#pas .card').forEach(card=>{
+  card.addEventListener('click', ()=> {
+    const pa = card.dataset.pa;
+    location.hash = 'pa-' + pa;
+  });
+});
+
+// ===== 顯示對應頁面 =====
+function showSectionFromHash(){
+  const hash = location.hash.replace('#','') || 'home';
+  document.querySelectorAll('section.view').forEach(sec=>{
+    sec.style.display = (sec.id===hash) ? 'block' : 'none';
+  });
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', showSectionFromHash);
+window.addEventListener('DOMContentLoaded', showSectionFromHash);
+
+// ===== 側邊欄 =====
+let sidebarOpen = false;
+function toggleSidebar(){
+  const sidebar = document.getElementById("mySidebar");
+  const main = document.getElementById("mainContent");
+  if(!sidebarOpen){
+    sidebar.style.width="250px";
+    main.style.marginLeft="250px";
+  } else {
+    sidebar.style.width="0";
+    main.style.marginLeft="0";
+  }
+  sidebarOpen=!sidebarOpen;
+}
+
+// 側邊欄導航
+const navLinks = document.querySelectorAll('a[data-target]');
+navLinks.forEach(a=>{
+  a.addEventListener('click', e=>{
     e.preventDefault();
-    const current = location.hash.replace('#','');
-    const idx = mainChapters.indexOf(current);
-    if(idx >=0 && idx < mainChapters.length-1) location.hash = mainChapters[idx+1];
-  }
-  function prevChapter(e){
-    e.preventDefault();
-    const current = location.hash.replace('#','');
-    const idx = mainChapters.indexOf(current);
-    if(idx>0) location.hash = mainChapters[idx-1];
-  }
-  document.querySelectorAll('#story .card').forEach(card=>{
-    card.addEventListener('click', ()=>{
-      location.hash = 'pa-' + card.dataset.chapter;
-    });
+    location.hash = a.dataset.target;
   });
+});
 
-  // ===== PA 章節資料 =====
-  const paChapters = {
-    king:[{id:'pa-king-1',title:'章節1'},{id:'pa-king-2',title:'章節2'},{id:'pa-king-3',title:'章節3'}],
-    shan:[{id:'pa-shan-1',title:'章節1'},{id:'pa-shan-2',title:'章節2'},{id:'pa-shan-3',title:'章節3'}],
-    magic:[{id:'pa-magic-1',title:'章節1'},{id:'pa-magic-2',title:'章節2'},{id:'pa-magic-3',title:'章節3'}],
-    palace:[{id:'pa-palace-1',title:'章節1'},{id:'pa-palace-2',title:'章節2'},{id:'pa-palace-3',title:'章節3'}]
-  };
-
-  // 生成 PA 章節列表
-  Object.keys(paChapters).forEach(pa=>{
-    const container = document.getElementById('pa-'+pa);
-    if(!container) return;
-    const grid = container.querySelector('.grid');
-    if(!grid) return;
-    paChapters[pa].forEach(ch=>{
-      const card = document.createElement('div');
-      card.className='card';
-      card.textContent = ch.title;
-      card.addEventListener('click', ()=> location.hash = ch.id);
-      grid.appendChild(card);
-    });
+// ===== 人物角色切換 =====
+document.querySelectorAll('.tabs .tab[data-char]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tabs .tab[data-char]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('char-sima').style.display=btn.dataset.char==='sima'?'block':'none';
+    document.getElementById('char-lin').style.display=btn.dataset.char==='lin'?'block':'none';
   });
+});
 
-  // PA 上一章/下一章
-  function nextPAChapter(pa){
-    const current = location.hash.replace('#','');
-    const idx = paChapters[pa].findIndex(c=>c.id===current);
-    if(idx>=0 && idx<paChapters[pa].length-1) location.hash = paChapters[pa][idx+1].id;
-  }
-  function prevPAChapter(pa){
-    const current = location.hash.replace('#','');
-    const idx = paChapters[pa].findIndex(c=>c.id===current);
-    if(idx>0) location.hash = paChapters[pa][idx-1].id;
-  }
-
-  // 點擊首頁卡片進入 PA 列表
-  document.querySelectorAll('#pas .card').forEach(card=>{
-    card.addEventListener('click', ()=> {
-      const pa = card.dataset.pa;
-      location.hash = 'pa-' + pa;
-    });
+// 人物世界觀切換
+document.querySelectorAll('#char-sima .tabs .tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('#char-sima .tabs .tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    ['sima-wei','sima-modern','sima-shan'].forEach(id=>document.getElementById(id).classList.remove('active'));
+    document.getElementById('sima-'+tab.dataset.world).classList.add('active');
   });
-
-  // ===== 顯示對應頁面 =====
-  function showSectionFromHash(){
-    const hash = location.hash.replace('#','')||'pas';
-    document.querySelectorAll('section.view').forEach(sec=>{
-      sec.style.display = (sec.id===hash) ? 'block' : 'none';
-    });
-  }
-  window.addEventListener('hashchange', showSectionFromHash);
-  window.addEventListener('DOMContentLoaded', showSectionFromHash);
-
-  // ===== 側邊欄 =====
-  let sidebarOpen = false;
-  function toggleSidebar(){
-    const sidebar = document.getElementById("mySidebar");
-    const main = document.getElementById("mainContent");
-    if(!sidebarOpen){
-      sidebar.style.width="250px";
-      main.style.marginLeft="250px";
-    } else {
-      sidebar.style.width="0";
-      main.style.marginLeft="0";
-    }
-    sidebarOpen=!sidebarOpen;
-  }
-
-  // 側邊欄導航
-  const navLinks = document.querySelectorAll('a[data-target]');
-  navLinks.forEach(a=>{
-    a.addEventListener('click', e=>{
-      e.preventDefault();
-      location.hash = a.dataset.target;
-    });
+});
+document.querySelectorAll('#char-lin .tabs .tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('#char-lin .tabs .tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    ['lin-wei','lin-modern','lin-shan'].forEach(id=>document.getElementById(id).classList.remove('active'));
+    document.getElementById(tab.dataset.world).classList.add('active');
   });
+});
 
-  // ===== 人物角色切換 =====
-  document.querySelectorAll('.tabs .tab[data-char]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('.tabs .tab[data-char]').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('char-sima').style.display=btn.dataset.char==='sima'?'block':'none';
-      document.getElementById('char-lin').style.display=btn.dataset.char==='lin'?'block':'none';
-    });
-  });
-  // 人物世界觀切換
-  document.querySelectorAll('#char-sima .tabs .tab').forEach(tab=>{
-    tab.addEventListener('click', ()=>{
-      document.querySelectorAll('#char-sima .tabs .tab').forEach(t=>t.classList.remove('active'));
-      tab.classList.add('active');
-      ['sima-wei','sima-modern','sima-shan'].forEach(id=>document.getElementById(id).classList.remove('active'));
-      document.getElementById('sima-'+tab.dataset.world).classList.add('active');
-    });
-  });
-  document.querySelectorAll('#char-lin .tabs .tab').forEach(tab=>{
-    tab.addEventListener('click', ()=>{
-      document.querySelectorAll('#char-lin .tabs .tab').forEach(t=>t.classList.remove('active'));
-      tab.classList.add('active');
-      ['lin-wei','lin-modern','lin-shan'].forEach(id=>document.getElementById(id).classList.remove('active'));
-      document.getElementById(tab.dataset.world).classList.add('active');
-    });
-  });
-
-  // ===== 圖片 Lightbox =====
-  const lightbox = document.getElementById('lightbox');
+// ===== 圖片 Lightbox + 獨立頁面 =====
+const lightbox = document.getElementById('lightbox');
 const lightboxImg = lightbox.querySelector('img');
 
 document.querySelectorAll('#gallery .card img').forEach((img, index)=>{
-  const imgId = 'img-' + (index + 1); // 每張圖片獨立頁面 ID
-  img.addEventListener('click', ()=> {
+  const imgId = 'img-' + (index + 1);
+  img.addEventListener('click', ()=>{
     // Lightbox 放大
     lightboxImg.src = img.src;
     lightbox.style.display='flex';
-    // 跳轉到獨立頁面
+    // 跳轉獨立頁面
     location.hash = imgId;
   });
 });
@@ -447,9 +361,7 @@ lightbox.addEventListener('click', e=>{
 document.addEventListener('keydown', e=>{
   if(e.key==='Escape') lightbox.style.display='none';
 });
-
 </script>
 </div>
 </body>
-
 </html>
