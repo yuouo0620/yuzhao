@@ -423,7 +423,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     <h2>圖片廊</h2>
     <p>內容</p>
     <div class="grid">
-      <div class="card"><img src="https://placekitten.com/300/200" alt="示意圖1"></div>
+      <div class="card"><img src="痛苦唸書.png" alt="痛苦唸書"></div>
       <div class="card"><img src="https://placekitten.com/301/200" alt="示意圖2"></div>
       <div class="card"><img src="https://placekitten.com/302/200" alt="示意圖3"></div>
       <div class="card"><img src="https://placekitten.com/303/200" alt="示意圖4"></div>
@@ -431,7 +431,6 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   </section>
 
 <script>
-  // 各PA章節資料
   const paChapters = {
     'king': [
       {id:'pa-king-1', title:'章節1'},
@@ -458,7 +457,9 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   // 動態生成章節卡片
   Object.keys(paChapters).forEach(pa=>{
     const container = document.getElementById('pa-'+pa);
+    if(!container) return; // 防止找不到節點報錯
     const grid = container.querySelector('.grid');
+    if(!grid) return;
     paChapters[pa].forEach(ch=>{
       const card = document.createElement('div');
       card.className = 'card';
@@ -468,40 +469,29 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     });
   });
 
-  // PA章節上下章
+  // 上一章 / 下一章
   function nextPAChapter(pa){
     const current = location.hash.replace('#','');
     const idx = paChapters[pa].findIndex(c=>c.id===current);
-    if(idx>=0 && idx<paChapters[pa].length-1) location.hash = paChapters[pa][idx+1].id;
+    if(idx>=0 && idx<paChapters[pa].length-1)
+      location.hash = paChapters[pa][idx+1].id;
   }
   function prevPAChapter(pa){
     const current = location.hash.replace('#','');
     const idx = paChapters[pa].findIndex(c=>c.id===current);
-    if(idx>0) location.hash = paChapters[pa][idx-1].id;
+    if(idx>0)
+      location.hash = paChapters[pa][idx-1].id;
   }
 
-  // 點擊PA首頁卡片進入章節列表
-  document.querySelectorAll('#pas .card').forEach(card=>{
-    card.addEventListener('click', ()=>{
-      const pa = card.dataset.pa;
-      location.hash = 'pa-'+pa;
+  // 顯示對應章節
+  window.addEventListener('hashchange', showSectionFromHash);
+  window.addEventListener('DOMContentLoaded', showSectionFromHash);
+  function showSectionFromHash(){
+    const current = location.hash.replace('#','');
+    document.querySelectorAll('section.view').forEach(sec=>{
+      sec.style.display = (sec.id === current || (current==='' && sec.id==='home')) ? 'block' : 'none';
     });
-  });
-  // 當 hash 改變時，顯示對應章節、隱藏其他
-window.addEventListener('hashchange', showSectionFromHash);
-window.addEventListener('DOMContentLoaded', showSectionFromHash);
-
-function showSectionFromHash(){
-  const current = location.hash.replace('#','');
-  document.querySelectorAll('section.view').forEach(sec=>{
-    if(sec.id === current){
-      sec.style.display = 'block';
-    } else {
-      sec.style.display = 'none';
-    }
-  });
-}
-
+  }
 </script>
 
 
