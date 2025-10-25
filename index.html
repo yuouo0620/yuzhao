@@ -128,7 +128,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   <!-- 首頁 -->
   <section id="home" class="view">
     <h1>首頁</h1>
-    <p>歡迎來到「懿生楰你」網站！</p>
+    <p>內容</p>
   </section>
 
   <!-- 人物介紹 -->
@@ -253,23 +253,19 @@ function toggleSidebar() {
   sidebarOpen=!sidebarOpen;
 }
 
-/* hash 導覽 */
+/* sidebar 導覽 hash (首頁 / 人物 / 主線 / 世界線列表 / 圖片廊 / 代表物) */
 const navLinks = document.querySelectorAll('a[data-target]');
-const views = document.querySelectorAll('.view');
+const mainViews = ['home','characters','story','pas','gallery','represent'];
 
-function showView(target){
-  views.forEach(v=>v.style.display = v.id===target?'block':'none');
-  navLinks.forEach(a=>a.classList.toggle('active', a.dataset.target===target));
-  window.scrollTo({top:0, behavior:'smooth'});
+function showSidebarView(target){
+  if(mainViews.includes(target)){
+    document.querySelectorAll('section.view').forEach(sec=>{
+      if(mainViews.includes(sec.id)){
+        sec.style.display = (sec.id===target)?'block':'none';
+      }
+    });
+  }
 }
-
-function route(){
-  const hash = location.hash.replace('#','')||'home';
-  showView(hash);
-}
-
-window.addEventListener('hashchange', route);
-window.addEventListener('DOMContentLoaded', route);
 
 navLinks.forEach(a=>{
   a.addEventListener('click', e=>{
@@ -277,6 +273,27 @@ navLinks.forEach(a=>{
     location.hash = a.dataset.target;
   });
 });
+
+/* hashchange 事件 */
+function handleHashChange(){
+  const hash = location.hash.replace('#','') || 'home';
+
+  // sidebar 導覽
+  if(mainViews.includes(hash)){
+    showSidebarView(hash);
+  }
+
+  // 顯示章節或圖片故事頁
+  document.querySelectorAll('section.view').forEach(sec=>{
+    // hash 等於 section.id 且不是 sidebar 導覽頁面
+    if(!mainViews.includes(sec.id)){
+      sec.style.display = (sec.id===hash)?'block':'none';
+    }
+  });
+}
+
+window.addEventListener('hashchange', handleHashChange);
+window.addEventListener('DOMContentLoaded', handleHashChange);
 
 /* 人物角色切換 */
 document.querySelectorAll('.tabs .tab[data-char]').forEach(btn=>{
@@ -344,7 +361,10 @@ function prevPAChapter(pa){
 
 /* 世界線選單跳轉 */
 document.querySelectorAll('#pas .card').forEach(card=>{
-  card.addEventListener('click', ()=> location.hash = 'pa-' + card.dataset.pa);
+  card.addEventListener('click', ()=>{
+    const pa = card.dataset.pa;
+    location.hash = 'pa-' + pa; // 先跳到章節列表
+  });
 });
 
 /* 圖片廊點圖片跳轉到獨立頁 */
@@ -366,17 +386,8 @@ document.querySelectorAll('.lightbox-img').forEach(img=>{
 });
 lightbox.addEventListener('click', e=>{ if(e.target===lightbox) lightbox.style.display='none'; });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') lightbox.style.display='none'; });
-
-/* 顯示對應頁面（hash 控制） */
-function showSectionFromHash(){
-  const hash = location.hash.replace('#','') || 'home';
-  document.querySelectorAll('section.view').forEach(sec=>{
-    sec.style.display = (sec.id === hash) ? 'block' : 'none';
-  });
-}
-window.addEventListener('hashchange', showSectionFromHash);
-window.addEventListener('DOMContentLoaded', showSectionFromHash);
 </script>
+
 <!-- 主線章節 -->
 <section id="pa-1" class="view">
   <h2>第一章</h2>
