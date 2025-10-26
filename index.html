@@ -58,41 +58,67 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 
 <!-- 人物介紹 -->
 <section id="characters" class="view">
-<h2>人物介紹</h2>
-<div class="tabs">
-<div class="tab active" data-char="sima">司馬懿</div>
-<div class="tab" data-char="lin">林楰召</div>
-</div>
-<div id="char-sima" class="subsection active">
-<h3>司馬懿</h3>
-<div class="tabs">
-<div class="tab active" data-world="wei">王者榮耀</div>
-<div class="tab" data-world="modern">心動的王者</div>
-<div class="tab" data-world="shan">山海奇都</div>
-</div>
-<div id="sima-wei" class="subsection active"><p>內容</p></div>
-  <div id="sima-wei" class="subsection active">
-  <p>服設</p>
-  <img src="IMG_3779.jpg" alt="服設" style="max-width:40%; border-radius:12px; margin-top:10px;">
+  <h2>人物介紹</h2>
+
+  <!-- 上層角色切換 -->
+  <div class="tabs">
+    <div class="tab active" data-char="sima">司馬懿</div>
+    <div class="tab" data-char="lin">林楰召</div>
   </div>
-<div id="sima-modern" class="subsection"><p>內容</p></div>
-<div id="sima-shan" class="subsection"><p>內容</p></div>
-</div>
-<div id="char-lin" class="subsection">
-<h3>林楰召</h3>
-<div class="tabs">
-<div class="tab active" data-world="lin-wei">王者榮耀</div>
-<div class="tab" data-world="lin-modern">心動的王者</div>
-<div class="tab" data-world="lin-shan">山海奇都</div>
-</div>
-<div id="lin-wei" class="subsection active">
-  <p>服設</p>
-  <img src="IMG_8445.PNG" alt="服設" style="max-width:40%; border-radius:12px; margin-top:10px;">
-</div>
-<div id="lin-modern" class="subsection"><p>內容</p></div>
-<div id="lin-shan" class="subsection"><p>內容</p></div>
-</div>
+
+  <!-- 司馬懿 -->
+  <div id="char-sima" class="subsection active">
+    <h3>司馬懿</h3>
+    <div class="tabs">
+      <div class="tab active" data-world="wei">王者榮耀</div>
+      <div class="tab" data-world="modern">心動的王者</div>
+      <div class="tab" data-world="shan">山海奇都</div>
+    </div>
+
+    <!-- 王者榮耀 -->
+    <div id="sima-wei" class="subsection active">
+      <p>服設</p>
+      <img src="IMG_3779.jpg" alt="司馬懿服設" class="char-img">
+    </div>
+
+    <!-- 心動的王者 -->
+    <div id="sima-modern" class="subsection">
+      <p>內容（例如：現代線服飾或性格設定）</p>
+    </div>
+
+    <!-- 山海奇都 -->
+    <div id="sima-shan" class="subsection">
+      <p>內容（例如：山海奇都世界觀設定）</p>
+    </div>
+  </div>
+
+  <!-- 林楰召 -->
+  <div id="char-lin" class="subsection">
+    <h3>林楰召</h3>
+    <div class="tabs">
+      <div class="tab active" data-world="lin-wei">王者榮耀</div>
+      <div class="tab" data-world="lin-modern">心動的王者</div>
+      <div class="tab" data-world="lin-shan">山海奇都</div>
+    </div>
+
+    <!-- 王者榮耀 -->
+    <div id="lin-wei" class="subsection active">
+      <p>服設</p>
+      <img src="IMG_8445.PNG" alt="林楰召服設" class="char-img">
+    </div>
+
+    <!-- 心動的王者 -->
+    <div id="lin-modern" class="subsection">
+      <p>內容</p>
+    </div>
+
+    <!-- 山海奇都 -->
+    <div id="lin-shan" class="subsection">
+      <p>內容</p>
+    </div>
+  </div>
 </section>
+
 
 <!-- 代表物 -->
 <section id="represent" class="view">
