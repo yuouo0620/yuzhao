@@ -34,6 +34,24 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   .grid {grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px;}
   #gallery .card img { max-width:150px; }
 }
+  .char-img {
+  max-width: 45%;
+  display: block;
+  margin: 12px auto 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+}
+.char-img:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+  .char-img {
+    max-width: 50%;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -83,12 +101,12 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 
     <!-- 心動的王者 -->
     <div id="sima-modern" class="subsection">
-      <p>內容（例如：現代線服飾或性格設定）</p>
+      <p>內容</p>
     </div>
 
     <!-- 山海奇都 -->
     <div id="sima-shan" class="subsection">
-      <p>內容（例如：山海奇都世界觀設定）</p>
+      <p>內容</p>
     </div>
   </div>
 
@@ -105,6 +123,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     <div id="lin-wei" class="subsection active">
       <p>服設</p>
       <img src="IMG_8445.PNG" alt="林楰召服設" class="char-img">
+  
     </div>
 
     <!-- 心動的王者 -->
