@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
@@ -51,6 +51,116 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     max-width: 50%;
   }
 }
+.img-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  margin-top: 20px;
+}
+.img-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: 240px;
+  text-align: center;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.img-desc {
+  margin-top: 10px;
+  color: #334155;
+  font-weight: 600;
+  text-align: center;
+}
+.img-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+/* 極光文字區專用 */
+.aura-background {
+  position: relative;
+  background: linear-gradient(270deg, #3a1c71, #6a11cb, #ffaf7b, #12c2e9);
+  background-size: 800% 800%;
+  animation: gradientMove 20s ease infinite;
+  color: white;
+  padding: 40px 20px;
+  border-radius: 16px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 0 50px rgba(255,255,255,0.2);
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+/* 漸層流動 */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 淡入動畫 */
+.fade-text {
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 波浪微動光暈 */
+.aura-background::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  animation: waveMove 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes waveMove {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(30deg) scale(1.05); }
+}
+
+/* 粒子效果 */
+.aura-background .particle {
+  position: absolute;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translateY(-50px) translateX(20px) scale(1.2); opacity: 0.7; }
+  100% { transform: translateY(-100px) translateX(-20px) scale(0.8); opacity: 0; }
+}
+
+/* 響應式文字與內邊距 */
+@media (max-width: 768px) {
+  .aura-background {
+    padding: 20px 15px;
+    font-size: 0.95rem;
+  }
+}
+
 
 </style>
 </head>
@@ -65,7 +175,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   <a href="#story" data-target="story">主線故事</a>
   <a href="#pas" data-target="pas">各種世界線</a>
   <a href="#gallery" data-target="gallery">番外小故事</a>
-  <a href="#represent" data-target="represent">代表物</a>
+  <a href="#represent" data-target="represent">圖片區</a>
 </div>
 
 <button class="open-btn" onclick="toggleSidebar()">☰</button>
@@ -139,11 +249,15 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 </section>
 
 
-<!-- 代表物 -->
+<!-- 圖片區 -->
 <section id="represent" class="view">
-<h2>代表物</h2>
-<div class="rep-section"><h4>司馬懿</h4><p>？</p></div>
-<div class="rep-section"><h4>林楰召</h4><p>？</p></div>
+  <h2>圖片區</h2>
+  <div class="img-grid">
+    <div class="img-card">
+      <img src="lover.JPEG" alt="lover" class="zoom-img">
+      <p class="img-desc">lover</p>
+    </div>
+  </div>
 </section>
 
 <!-- 主線故事 -->
@@ -312,7 +426,8 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 <div class="card"><img src="痛苦唸書.PNG" alt="痛苦唸書"><h2>痛苦唸書</h2></div>
 <div class="card"><img src="520.PNG" alt="520"><h2>2025/5/20紀念</h2></div>
 <div class="card"><img src="2025懿生日.JPEG" alt="2025司馬懿生日"><h2>2025司馬懿生日</h2></div>
-<div class="card"><img src="一週年預熱.PNG" alt="前置作業"><h2>前置作業</h2></div>
+<div class="card"><img src="一週年預熱.PNG" alt="前置作業"><h2>一週年前置作業</h2></div>
+<div class="card"><img src="一週年.JPEG" alt="一週年"><h2>一週年紀念</h2></div>
 </div></section>
 
 <!-- 圖片獨立頁面 -->
@@ -346,7 +461,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 「嗯。」
   </p><a href="#gallery" class="back-btn">返回</a></div></section>
 
-<section id="img-4" class="view"><h2>前置作業</h2><img src="一週年預熱.PNG" style="max-width:40%;"><div class="pa-nav">
+<section id="img-4" class="view"><h2>一週年前置作業</h2><img src="一週年預熱.PNG" style="max-width:40%;"><div class="pa-nav">
   <p style="max-width:700px; margin:0 auto; line-height:1.8; text-align:justify;">
 不知道是為了什麼，林楰召這次竟然打算在魏都停留半個月，在此期間，她四處採購奇奇怪怪的東西，甚至不知道用了什麼方法讓那位宵衣旰食的軍師向主公告了假，陪同她準備下一場旅行。<br><br>
 「驚！連休沐日都在工作的司馬軍師竟然在十二月初向主公告假！！！到底是真的需要休假呢？還是被身邊的美人誘惑了呢？請持續關注⋯⋯」<br><br>
@@ -360,6 +475,76 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 「是，所以昨天燒完，今天沒有錢讓妳揮霍了。」<br><br>
 「⋯⋯司馬仲達！」
   </p><a href="#gallery" class="back-btn">返回</a></div></section>
+
+<section id="img-4" class="view"><h2>一週年紀念</h2><img src="一週年.JPEG" style="max-width:40%;"><div class="pa-nav">
+ <p style="max-width:700px; margin:0 auto; line-height:1.8; text-align:justify;">
+<div class="aura-background fade-text">
+𝟹𝟼𝟻𝙳𝙰𝚈𝚂˚˖˚˳⌖
+ 
+✧*｡＊.° ·˚✧*｡𝟷𝑠𝑡 𝑎𝑛𝑛𝑖𝑣𝑒𝑟𝑠𝑎𝑟𝑦✧*｡＊.° ·˚✧*｡＊.° ·˚
+ 
+「兩人的身影在斑斕的極光下逐漸交會，如同被磁場引導一般。他們之間的距離漸漸縮短，於是，在一次無聲的碰撞後，渲染出繽紛的色彩。將這份悸動緊緊包裹，找準時機，用盡全力潑入彼此封閉的世界，滲透進每條奔騰的河川，每片靜謐的森林，每層堆疊的熬過6000度的歷練——最終，在同頻共振影響下，與對方一齊跳動。」
+
+ ⊹𝄞⊹︵︵︵⊹𝄞⊹︵︵︵⊹𝄞⊹︵︵︵⊹𝄞⊹︵︵︵⊹
+
+
+  司馬懿確實喜歡極光，因為這絢爛是他第一次感受到神明眷戀之手停留在身上。
+
+  但相較眼前人⋯⋯雖然少女原本的色彩在一次次的旅行中漸漸磨損，卻又不停的吸收新的染料，讓她更加繽紛。何況她身上早已滲入了屬於司馬懿的色彩，使他得以自在的溶於其中。
+
+
+  也許根本不需要渴求神明的目光，因為就算只是渺小的人類，攜手並肩，就這樣不去祈禱奇蹟的到來，一直走下去也沒什麼不好的吧？
+
+
+
+  林楰召向來不喜歡寒冷的地方，就算已嘗試過多種療方，被那股力量損傷的身體還是只要一吹冷風便會開始停擺。
+
+  可是這次不一樣，在她得知司馬懿喜歡極光後，便在旅行的期間不停的打聽，終於被她抓到這次機會—邀請那位大忙人再感受一次「神跡」。
+
+
+
+  冰冷的空氣令司馬懿低於常人的體溫都顯得溫暖很多，林楰召放慢動作，緩緩地一點一點往他身上靠。難得穿著長袖的軍師，也默默地伸出手，將少女攬入懷中。
+
+  一個不小心，雙方視線交錯，寒風呼嘯著讓他們靠得更近。
+
+心照不宣看著彼此眼中映出的色彩⋯⋯
+
+
+
+「好了，妳已經夠傻了，再繼續凍下去就要變蠢了。」
+
+「哦⋯⋯」
+
+她輕輕應聲。
+而司馬懿也沒有再說話，而是輕輕的收緊手臂。
+
+兩人的身影漸漸沒入風雪，朝遠方的燈火前進。
+而極光仍於天際中糾纏，如同他們的命運，如同他們必定相伴的未來。
+  
+</p><a href="#gallery" class="back-btn">返回</a></div></section>
+
+
+</div>
+
+<script>
+// 生成粒子效果，只作用在 aura-background
+const aura = document.querySelector('.aura-background');
+for(let i=0; i<50; i++){
+  const p = document.createElement('div');
+  p.classList.add('particle');
+  p.style.top = Math.random()*100 + '%';
+  p.style.left = Math.random()*100 + '%';
+  const size = Math.random()*3 + 2;
+  p.style.width = size+'px';
+  p.style.height = size+'px';
+  const duration = Math.random()*6 + 4;
+  p.style.animationDuration = duration+'s';
+  p.style.animationDelay = Math.random()*5+'s';
+  aura.appendChild(p);
+}
+</script>
+
+   
 <script>
 // 主線章節
 const mainChapters=['pa-1','pa-2','pa-3','pa-4','pa-5'];
@@ -425,6 +610,42 @@ document.querySelectorAll('#gallery .card img').forEach((img,index)=>{
   const imgId = 'img-'+(index+1);
   img.addEventListener('click',()=> location.hash=imgId);
 });
+// Lightbox 彈出圖片放大
+const lightbox = document.createElement('div');
+lightbox.id = 'lightbox';
+document.body.appendChild(lightbox);
+
+lightbox.style.position = 'fixed';
+lightbox.style.top = '0';
+lightbox.style.left = '0';
+lightbox.style.width = '100%';
+lightbox.style.height = '100%';
+lightbox.style.background = 'rgba(0,0,0,0.8)';
+lightbox.style.display = 'flex';
+lightbox.style.alignItems = 'center';
+lightbox.style.justifyContent = 'center';
+lightbox.style.padding = '20px';
+lightbox.style.zIndex = '999';
+lightbox.style.display = 'none';
+
+const imgBox = document.createElement('img');
+imgBox.style.maxWidth = '90%';
+imgBox.style.maxHeight = '90%';
+imgBox.style.borderRadius = '12px';
+imgBox.style.boxShadow = '0 2px 10px rgba(255,255,255,0.2)';
+lightbox.appendChild(imgBox);
+
+document.querySelectorAll('.zoom-img').forEach(img => {
+  img.addEventListener('click', () => {
+    lightbox.style.display = 'flex';
+    imgBox.src = img.src;
+  });
+});
+
+lightbox.addEventListener('click', () => {
+  lightbox.style.display = 'none';
+});
+
 </script>
 
 </div>
