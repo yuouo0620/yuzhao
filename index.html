@@ -81,15 +81,16 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 }
 /* 整個一週年頁面 極光背景 */
 #img-5 {
-  background: linear-gradient(270deg, rgba(58,28,113,0.7), rgba(106,17,203,0.7), rgba(255,175,123,0.5), rgba(18,194,233,0.5));
-  background-size: 1200% 1200%; /* 放大背景，使流動感更明顯 */
-  animation: gradientMove 25s ease infinite; /* 延長動畫時間讓流動更柔和 */
+  position: relative;
+  background: linear-gradient(270deg, rgba(18,194,233,0.7), rgba(0,128,128,0.6), rgba(0,255,180,0.5), rgba(12,64,255,0.6));
+  background-size: 1200% 1200%; /* 流動感更明顯 */
+  animation: gradientMove 25s ease infinite; /* 緩慢流動 */
   color: white;
   padding: 60px 20px;
   border-radius: 16px;
   overflow: hidden;
   text-align: center;
-  box-shadow: 0 0 60px rgba(255,255,255,0.2) inset; /* 增加發光感 */
+  box-shadow: 0 0 60px rgba(255,255,255,0.2) inset; /* 發光感 */
 }
 
 /* 流動極光背景 */
@@ -107,9 +108,9 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   left: -60%;
   width: 220%;
   height: 220%;
-  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-  animation: waveMove 12s ease-in-out infinite alternate; /* 更慢，更柔和 */
-  filter: blur(15px); /* 模糊，增強發光感 */
+  background: radial-gradient(circle, rgba(0,255,200,0.15) 0%, transparent 70%);
+  animation: waveMove 12s ease-in-out infinite alternate;
+  filter: blur(15px); /* 模糊增加光暈感 */
   pointer-events: none;
   z-index: 0;
 }
@@ -674,29 +675,21 @@ function generateImg5Particles() {
     const p = document.createElement("div");
     p.classList.add("img5-particle");
 
-    const colors = [
-      "rgba(171,130,255,0.25)",
-      "rgba(120,200,255,0.25)",
-      "rgba(150,255,200,0.25)"
-    ];
-    p.style.background = colors[Math.floor(Math.random() * colors.length)];
-
+    p.style.background = "rgba(255,255,255,0.5)"; // 白色粒子
     p.style.top  = Math.random() * 100 + "%";
     p.style.left = Math.random() * 100 + "%";
 
-    p.style.opacity = Math.random() * 0.5 + 0.3; // 增加明顯度
-const size = Math.random() * 4 + 3; // 粒子更大
-p.style.boxShadow = `0 0 ${size*2}px rgba(255,255,255,0.6)`;
+    const size = Math.random() * 4 + 2; // 粒子更大
+    p.style.width  = size + "px";
+    p.style.height = size + "px";
 
-
-    const duration = Math.random() * 6 + 6;
-    p.style.animationDuration = duration + "s";
-
+    p.style.animationDuration = Math.random() * 6 + 6 + "s";
     p.style.animationDelay = Math.random() * 5 + "s";
-
+    p.style.boxShadow = `0 0 ${size*2}px rgba(255,255,255,0.6)`; // 白色發光
     container.appendChild(p);
   }
 }
+
 
 const observer = new MutationObserver(() => {
   const img5 = document.getElementById("img-5");
