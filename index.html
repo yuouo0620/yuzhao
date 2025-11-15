@@ -81,15 +81,15 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 }
 /* 整個一週年頁面 極光背景 */
 #img-5 {
-  position: relative;
-  background: linear-gradient(270deg, #3a1c71, #6a11cb, #ffaf7b, #12c2e9);
-  background-size: 800% 800%;
-  animation: gradientMove 20s ease infinite;
+  background: linear-gradient(270deg, rgba(58,28,113,0.7), rgba(106,17,203,0.7), rgba(255,175,123,0.5), rgba(18,194,233,0.5));
+  background-size: 1200% 1200%; /* 放大背景，使流動感更明顯 */
+  animation: gradientMove 25s ease infinite; /* 延長動畫時間讓流動更柔和 */
   color: white;
   padding: 60px 20px;
   border-radius: 16px;
   overflow: hidden;
   text-align: center;
+  box-shadow: 0 0 60px rgba(255,255,255,0.2) inset; /* 增加發光感 */
 }
 
 /* 流動極光背景 */
@@ -103,15 +103,17 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 #img-5::before {
   content: "";
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-  animation: waveMove 8s ease-in-out infinite alternate;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+  animation: waveMove 12s ease-in-out infinite alternate; /* 更慢，更柔和 */
+  filter: blur(15px); /* 模糊，增強發光感 */
   pointer-events: none;
   z-index: 0;
 }
+
 
 @keyframes waveMove {
   0% { transform: rotate(0deg) scale(1); }
@@ -140,10 +142,12 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 /* 粒子漂浮 */
 @keyframes img5float {
   0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
-  20%  { opacity: 0.3; }
-  50%  { transform: translateY(-80px) translateX(40px) scale(1.3); opacity: 0.2; }
-  100% { transform: translateY(-160px) translateX(-20px) scale(0.9); opacity: 0; }
+  25%  { transform: translateY(-40px) translateX(20px) scale(1.2); opacity: 0.5; }
+  50%  { transform: translateY(-90px) translateX(40px) scale(1.4); opacity: 0.3; }
+  75%  { transform: translateY(-130px) translateX(10px) scale(1.2); opacity: 0.4; }
+  100% { transform: translateY(-160px) translateX(-20px) scale(1); opacity: 0; }
 }
+
 
 /* 粒子旋轉 */
 @keyframes img5spin {
@@ -489,7 +493,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
 「嗯。」
   </p><a href="#gallery" class="back-btn">返回</a></div></section>
 
-<section id="img-4" class="view"><h2>一週年前置作業</h2><img src="一週年預熱.PNG" style="max-width:40%;"><div class="pa-nav">
+<section id="img-4" class="view"><h2>一週年前置作業</h2><img src="一週年預熱.PNG" style="max-width:60%;"><div class="pa-nav">
   <p style="max-width:700px; margin:0 auto; line-height:1.8; text-align:justify;">
 不知道是為了什麼，林楰召這次竟然打算在魏都停留半個月，在此期間，她四處採購奇奇怪怪的東西，甚至不知道用了什麼方法讓那位宵衣旰食的軍師向主公告了假，陪同她準備下一場旅行。<br><br>
 「驚！連休沐日都在工作的司馬軍師竟然在十二月初向主公告假！！！到底是真的需要休假呢？還是被身邊的美人誘惑了呢？請持續關注⋯⋯」<br><br>
@@ -680,9 +684,10 @@ function generateImg5Particles() {
     p.style.top  = Math.random() * 100 + "%";
     p.style.left = Math.random() * 100 + "%";
 
-    const size = Math.random() * 2.5 + 2;
-    p.style.width  = size + "px";
-    p.style.height = size + "px";
+    p.style.opacity = Math.random() * 0.5 + 0.3; // 增加明顯度
+const size = Math.random() * 4 + 3; // 粒子更大
+p.style.boxShadow = `0 0 ${size*2}px rgba(255,255,255,0.6)`;
+
 
     const duration = Math.random() * 6 + 6;
     p.style.animationDuration = duration + "s";
