@@ -98,53 +98,36 @@ h1,h2,h3,h4,p{ margin-bottom:12px; text-align:center; }
 /* --------------------
 gallery（番外）卡片
 -------------------- */
-.img-grid{
-  display:flex;              /* 用 flex 排列（先前你有兩種，一併統一成 flex） */
-  flex-wrap:wrap;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
   gap:20px;
-  justify-content:center;
+  justify-items:center;
   margin-top:20px;
 }
 
-/* 卡片*/
-.img-grid{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  height:250px;              /* 你原本有的固定高度 */
-  padding:10px;
-  border:1px solid #ccc;
-  box-shadow:0 2px 6px rgba(0,0,0,0.1);
-  vertical-align:top;
-  overflow:hidden;           /* 保留原本裁切效果 */
-  width:fit-content;         /* 卡片寬度以內容（圖片）為主 */
-  max-width:100%;
-  transition:transform .3s ease-in-out;
+.card{
   background:#fff;
   border-radius:12px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.05);
+  padding:20px;
+  width:100%;
+  max-width:260px;  /* gallery 卡片最大寬度（你原本有） */
+  cursor:pointer;
+  transition:transform .2s;
+  margin:0 auto;
 }
+.card:hover{ transform:translateY(-4px); }
 
-/* 圖片：保持你原本行為（height:100% -> 撐滿卡片高度；object-fit:cover -> 可能會裁切） */
-.img-grid img{
-  display:block;
-  width:auto;          /* 自動寬度以維持比例 */
-  height:100%;         /* 撐滿卡片高度（保留原功能） */
-  max-width:100%;
-  object-fit:cover;    /* 保留原本會裁切的行為 */
+/* gallery 圖片（你原本設定：填滿寬度、object-fit:cover） */
+#gallery .card img{
+  width:100%;
+  max-width:200px;
+  height:auto;
   border-radius:12px;
-  transition:transform .3s ease-in-out;
+  cursor:pointer;
+  object-fit:cover; /* 保持你原本會裁切的行為 */
 }
-
-/* 如果你想要「不裁切、完整顯示」的替代方案，
-   可以在 HTML 上給某張圖額外 class `contain-img`，CSS 如下（目前不啟用）：
-   .img-card img.contain-img { object-fit: contain; height: auto; width: 100%; }
-*/
-
-/* 圖片說明/繪師字體 */
-.img-desc{ text-align:center; margin-top:5px; font-size:25px; color:#000; }
-.illustrator{ font-size:.13rem; color:#000000; font-weight:normal; }
-
 
 /* 整個卡片區塊可點 */
 .card-link {
