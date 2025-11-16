@@ -79,21 +79,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.12);
 }
-/* 整個一週年頁面 極光背景 */
-#img-5 {
-  position: relative;
-  background: linear-gradient(270deg, rgba(18,194,233,0.35), rgba(0,128,128,0.3), rgba(0,255,180,0.25), rgba(12,64,255,0.3));
-  background-size: 1200% 1200%; /* 流動感更明顯 */
-  animation: gradientMove 25s ease infinite; /* 緩慢流動 */
-  color: white;
-  padding: 60px 20px;
-  border-radius: 16px;
-  overflow: hidden;
-  text-align: center;
-  box-shadow: 0 0 60px rgba(255,255,255,0.2) inset; /* 發光感 */
-}
-
-/* 流動極光背景 */
+/* 極光流動 */
 @keyframes gradientMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -110,33 +96,33 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   height: 220%;
   background: radial-gradient(circle, rgba(0,255,200,0.15) 0%, transparent 70%);
   animation: waveMove 12s ease-in-out infinite alternate;
-  filter: blur(15px); /* 模糊增加光暈感 */
+  filter: blur(15px);
   pointer-events: none;
   z-index: 0;
 }
-
-
 @keyframes waveMove {
   0% { transform: rotate(0deg) scale(1); }
   100% { transform: rotate(30deg) scale(1.08); }
 }
 
-/* 粒子容器（放在 img-5 內） */
+/* 粒子容器 */
 #img5-particles {
   position: absolute;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  z-index: 100; /* 粒子在光暈上層，但在文字下層 */
+  z-index: 100; /* 確保粒子在背景上方 */
 }
 
-/* 粒子本體 */
+/* 粒子樣式 */
 .img5-particle {
   position: absolute;
   border-radius: 50%;
   width: 4px;
   height: 4px;
-  opacity: 0.25;
+  opacity: 0.5;
+  background: rgba(255,255,255,0.5);
+  box-shadow: 0 0 8px rgba(255,255,255,0.5);
   animation: img5float linear infinite, img5spin linear infinite;
 }
 
@@ -149,34 +135,21 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   100% { transform: translateY(-160px) translateX(-20px) scale(1); opacity: 0; }
 }
 
-
 /* 粒子旋轉 */
 @keyframes img5spin {
   0%   { rotate: 0deg; }
   100% { rotate: 360deg; }
 }
 
-/* 淡入動畫（標題與文字可用） */
+/* 淡入文字 */
 .fade-text {
   opacity: 0;
   animation: fadeIn 2s ease forwards;
   animation-delay: 0.2s;
 }
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-#img-5 {
-  position: relative;
-  z-index: 0;
-}
-#img-5 h2,
-#img-5 h3,
-#img-5 p,
-#img-5 .pa-nav,
-#img-5 .aura-background {
-  color: black;
 }
 
 
@@ -688,27 +661,25 @@ function generateImg5Particles() {
   for (let i = 0; i < 90; i++) {
     const p = document.createElement("div");
     p.classList.add("img5-particle");
-
-    p.style.background = "rgba(255,255,255,0.5)"; // 白色粒子
     p.style.top  = Math.random() * 100 + "%";
     p.style.left = Math.random() * 100 + "%";
 
-    const size = Math.random() * 4 + 2; // 粒子更大
-    p.style.width  = size + "px";
+    const size = Math.random() * 4 + 2;
+    p.style.width = size + "px";
     p.style.height = size + "px";
-
-    p.style.animationDuration = Math.random() * 6 + 6 + "s";
+    p.style.animationDuration = (Math.random() * 6 + 6) + "s";
     p.style.animationDelay = Math.random() * 5 + "s";
-    p.style.boxShadow = `0 0 ${size*2}px rgba(255,255,255,0.6)`; // 白色發光
+
     container.appendChild(p);
   }
 }
-window.addEventListener("hashchange", () => {
-  if (location.hash === "#img-5") {
-    generateImg5Particles();
-  }
-});
 
+// 初次載入或 hash 變化時生成粒子
+function checkImg5() {
+  if (location.hash === "#img-5") generateImg5Particles();
+}
+window.addEventListener("hashchange", checkImg5);
+window.addEventListener("DOMContentLoaded", checkImg5);
 
 
 
