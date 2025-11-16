@@ -177,30 +177,48 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     font-size: 0.95rem;
   }
 }
+/* 圖片網格 */
 .img-grid {
-  display: flex;          /* 使用 flex 排列卡片 */
-  flex-wrap: wrap;        /* 多行時自動換行 */
-  gap: 20px;              /* 卡片間距 */
+  display: flex;       /* 使用 flex 排列卡片 */
+  flex-wrap: wrap;     /* 多行自動換行 */
+  gap: 20px;           /* 卡片間距 */
 }
 
+/* 卡片容器 */
 .img-card {
-  display: inline-block;      /* 讓寬度隨內容自動 */
-  height: 250px;              /* 固定高度，可自行調整 */
+  display: flex;               /* 方便圖片置中 */
+  flex-direction: column;      /* 圖片上方文字置下方 */
+  align-items: center;         /* 水平置中 */
+  justify-content: center;     /* 垂直置中 */
+  height: 250px;               /* 固定高度，可調整 */
   padding: 10px;
   border: 1px solid #ccc;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  vertical-align: top;        /* 對齊頂部 */
-  overflow: hidden;           /* 避免圖片過高跑出 */
+  vertical-align: top;         /* 對齊頂部 */
+  overflow: hidden;            /* 避免圖片超出卡片 */
+  width: fit-content;          /* 寬度隨圖片自動 */
+  transition: transform 0.3s ease-in-out;
+  background: #fff;            /* 可選，保持原樣 */
+  border-radius: 12px;         /* 保持圓角 */
 }
 
+/* 圖片 */
 .img-card img {
-  display: block;
-  width: auto;               /* 寬度依圖片 */
-  height: 100%;              /* 撐滿卡片高度 */
-  max-width: 100%;           /* 避免超出卡片 */
-  object-fit: cover;         /* 保持比例裁切圖片填滿高度 */
+  display: block;             /* 避免底部空隙 */
+  width: auto;                /* 寬度依圖片比例 */
+  height: 100%;               /* 撐滿卡片高度 */
+  max-width: 100%;            /* 避免超出卡片 */
+  object-fit: cover;          /* 保持比例裁切填滿 */
+  border-radius: 12px;        /* 圓角 */
+  transition: transform 0.3s ease-in-out;
 }
 
+/* hover 效果 */
+.zoom-img:hover {
+  transform: scale(1.05);     /* 微放大 */
+}
+
+/* 圖片說明文字 */
 .img-desc {
   text-align: center;
   margin-top: 5px;
@@ -208,18 +226,33 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   color: #333;
 }
 
-
-.zoom-img:hover {
-  transform: scale(1.05); /* 滑鼠懸停微放大 */
-}
-
-
-/*繪師字體部分*/
+/* 繪師字體 */
 .illustrator {
-  font-size: 0.8rem;   /* 比標題小 */
-  color: #888888;      /* 灰色 */
-  font-weight: normal; /* 如果不想太粗 */
+  font-size: 0.8rem; 
+  color: #888888; 
+  font-weight: normal; 
 }
+/* 手機 / 小螢幕調整 */
+@media (max-width: 768px) {
+  .img-grid {
+    justify-content: center;   /* 小螢幕卡片置中 */
+    gap: 10px;                 /* 間距稍微縮小 */
+  }
+
+  .img-card {
+    height: auto;              /* 高度隨圖片自適應 */
+    width: 90%;                /* 最大寬度 90% 螢幕 */
+    padding: 8px;
+  }
+
+  .img-card img {
+    height: auto;              /* 高度自動 */
+    width: 100%;               /* 填滿卡片寬度 */
+    object-fit: contain;       /* 保持比例完整顯示 */
+  }
+}
+
+
 
 
 </style>
