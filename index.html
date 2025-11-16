@@ -177,16 +177,37 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
     font-size: 0.95rem;
   }
 }
-/* 圖片區統一尺寸 */
-.zoom-img {
-  height: 180px;      /* 固定高度，可調整 */
-  width: auto;        /* 自動比例縮放 */
-  border-radius: 12px;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-  display: block;
-  margin: 10px auto;  /* 置中 */
+.img-grid {
+  display: flex;          /* 使用 flex 排列卡片 */
+  flex-wrap: wrap;        /* 多行時自動換行 */
+  gap: 20px;              /* 卡片間距 */
 }
+
+.img-card {
+  display: inline-block;      /* 讓寬度隨內容自動 */
+  height: 250px;              /* 固定高度，可自行調整 */
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  vertical-align: top;        /* 對齊頂部 */
+  overflow: hidden;           /* 避免圖片過高跑出 */
+}
+
+.img-card img {
+  display: block;
+  width: auto;               /* 寬度依圖片 */
+  height: 100%;              /* 撐滿卡片高度 */
+  max-width: 100%;           /* 避免超出卡片 */
+  object-fit: cover;         /* 保持比例裁切圖片填滿高度 */
+}
+
+.img-desc {
+  text-align: center;
+  margin-top: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
 
 .zoom-img:hover {
   transform: scale(1.05); /* 滑鼠懸停微放大 */
