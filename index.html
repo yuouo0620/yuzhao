@@ -127,7 +127,7 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  z-index: 1; /* 粒子在光暈上層，但在文字下層 */
+  z-index: 50; /* 粒子在光暈上層，但在文字下層 */
 }
 
 /* 粒子本體 */
@@ -167,6 +167,11 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+#img-5 {
+  position: relative;
+  z-index: 0;
+}
+
 
 
 
@@ -689,15 +694,14 @@ function generateImg5Particles() {
     container.appendChild(p);
   }
 }
-
-
-const observer = new MutationObserver(() => {
-  const img5 = document.getElementById("img-5");
-  if (img5 && img5.classList.contains("active")) {
+window.addEventListener("hashchange", () => {
+  if (location.hash === "#img-5") {
     generateImg5Particles();
   }
 });
-observer.observe(document.body, { attributes: true, subtree: true });
+
+
+
 
 
 </script>
