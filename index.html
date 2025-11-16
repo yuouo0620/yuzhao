@@ -836,6 +836,20 @@ function showSection(sectionId) {
   // 進到新頁面後捲到最上方
   window.scrollTo({ top: 0, behavior: "instant" });
 }
+// 番外圖片頁面自動回到最上方
+window.addEventListener("hashchange", () => {
+  const id = location.hash.replace("#", "");
+  const target = document.getElementById(id);
+
+  if (target && target.classList.contains("view")) {
+    // 顯示該頁面
+    document.querySelectorAll(".view").forEach(v => v.style.display = "none");
+    target.style.display = "block";
+
+    // 捲到最上方
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+});
 
 
 
