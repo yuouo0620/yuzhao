@@ -96,14 +96,13 @@ h1,h2,h3,h4,p{ margin-bottom:12px; text-align:center; }
 }
 
 /* --------------------
-   gallery（番外）卡片：保持原本行為
-   - 卡片 max-width 與圖片以你原本為主（圖片寬度填滿卡片）
+   gallery（番外）卡片：
    -------------------- */
 .grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
+  display:flex;
+  flex-wrap:wrap;
   gap:20px;
-  justify-items:center;
+  justify-content:center;
   margin-top:20px;
 }
 
@@ -111,23 +110,23 @@ h1,h2,h3,h4,p{ margin-bottom:12px; text-align:center; }
   background:#fff;
   border-radius:12px;
   box-shadow:0 2px 6px rgba(0,0,0,0.05);
-  padding:20px;
-  width:100%;
-  max-width:260px;  /* gallery 卡片最大寬度（你原本有） */
+  overflow:hidden;       /* 防止圖片溢出 */
+  width:200px;           /* 可調整寬度 */
+  height:250px;          /* 固定卡片高度 */
   cursor:pointer;
   transition:transform .2s;
-  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
+
 .card:hover{ transform:translateY(-4px); }
 
-/* gallery 圖片（你原本設定：填滿寬度、object-fit:cover） */
-#gallery .card img{
-  width:100%;
-  max-width:200px;
-  height:auto;
-  border-radius:12px;
-  cursor:pointer;
-  object-fit:cover; /* 保持你原本會裁切的行為 */
+.card img{
+  height:100%;           /* 撐滿卡片高度 */
+  width:auto;            /* 保持比例 */
+  object-fit:cover;      /* 必要裁切 */
+  border-radius:12px 12px 0 0;
 }
 
 /* 圖片卡片整塊可點 */
@@ -155,7 +154,7 @@ h1,h2,h3,h4,p{ margin-bottom:12px; text-align:center; }
   margin-top:20px;
 }
 
-/* 卡片：桌面版高度固定（保留你原本功能） */
+/* 卡片*/
 .img-card{
   display:flex;
   flex-direction:column;
@@ -547,7 +546,7 @@ h1,h2,h3,h4,p{ margin-bottom:12px; text-align:center; }
     <a href="javascript:void(0)" class="back-btn" onclick="nextPAChapter('palace')">下一章</a>
   </div>
 </section>
-<!-- 圖片廊 -->
+<!-- 番外 -->
 <section id="gallery" class="view">
   <h2>番外小故事</h2>
   <div class="grid">
