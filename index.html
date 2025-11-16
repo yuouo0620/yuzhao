@@ -5,36 +5,141 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>懿生楰你</title>
 <style>
-:root { --primary-color:#2b6cb0; --secondary-color:#e0e7ff; --sidebar-bg:#f8fafc; --sidebar-border:#e2e8f0;}
-body {margin:0;font-family:'Noto Sans TC',sans-serif;display:flex;min-height:100vh;overflow-x:hidden;text-align:center;background:#fafafa;}
-.sidebar {height:100%; width:0; position:fixed; top:0; left:0; background: var(--sidebar-bg); overflow-x:hidden; transition:0.3s; border-right:1px solid var(--sidebar-border); display:flex; flex-direction:column; align-items:center; z-index:200;}
-.sidebar img {margin-top:20px;width:80px;height:80px;border-radius:50%;}
-.sidebar h2 {margin:10px 0 20px;color: var(--primary-color);}
-.sidebar a {padding:10px 20px;text-decoration:none;font-size:18px;color:#334155;display:block;width:100%;text-align:center;transition:0.2s;}
-.sidebar a:hover, .sidebar a.active {background: var(--secondary-color); color: var(--primary-color);}
-.main {flex:1; padding:40px 20px; margin-left:0; transition: margin-left 0.3s;}
-.open-btn {position:fixed; top:20px; left:20px; font-size:20px; padding:10px 15px; cursor:pointer; background: var(--primary-color); color:white; border:none; border-radius:8px; z-index:300;}
-h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
-.grid {display: grid;grid-template-columns: repeat(3, 1fr); /* 固定每行3張 */gap: 20px; /* 卡片間距 */justify-items: center;margin-top: 20px;}
-.card{background:#fff; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05); padding:20px; width:100%; max-width:260px; cursor:pointer; transition:transform .2s; margin:0 auto;}
-.card:hover{transform:translateY(-4px);}
-.view{display:none;}
-.tabs{display:flex; justify-content:center; gap:10px; margin:16px 0;}
-.tab{padding:8px 12px; border-radius:8px; background:#f1f5f9; color:#334155; font-weight:600; cursor:pointer;}
-.tab.active{background: var(--primary-color); color:white;}
-.subsection{display:none;}
-.subsection.active{display:block;}
-.back-btn{display:inline-block;margin:8px 6px;padding:8px 14px;background: var(--secondary-color);color: var(--primary-color);border-radius:8px;text-decoration:none;font-weight:600;}
-.rep-section{background: var(--secondary-color);padding:12px;border-radius:8px;margin:20px 0;}
-#gallery .card img { width:100%; max-width:200px; height:auto; border-radius:12px; cursor:pointer; object-fit:cover; }
-@media(max-width:768px){
-  .main {padding:20px 10px;}
-  .sidebar {width:200px;}
-  .open-btn {top:10px; left:10px; font-size:18px;}
-  .grid {grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px;}
-  #gallery .card img { max-width:150px; }
+/* ====== 全站主題色 ====== */
+:root {
+  --primary-color: #2b6cb0;
+  --secondary-color: #e0e7ff;
+  --sidebar-bg: #f8fafc;
+  --sidebar-border: #e2e8f0;
 }
-  .char-img {
+
+/* ====== 基本架構 ====== */
+body {
+  margin: 0;
+  font-family: 'Noto Sans TC', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+  text-align: center;
+  background: #fafafa;
+}
+
+h1, h2, h3, h4, p {
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* ====== 側邊欄 ====== */
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: var(--sidebar-bg);
+  overflow-x: hidden;
+  transition: 0.3s;
+  border-right: 1px solid var(--sidebar-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 200;
+}
+
+.sidebar img {
+  margin-top: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.sidebar h2 {
+  margin: 10px 0 20px;
+  color: var(--primary-color);
+}
+
+.sidebar a {
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #334155;
+  display: block;
+  width: 100%;
+  text-align: center;
+  transition: 0.2s;
+}
+.sidebar a:hover, .sidebar a.active {
+  background: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+/* ====== 主內容 ====== */
+.main {
+  flex: 1;
+  padding: 40px 20px;
+  margin-left: 0;
+  transition: margin-left 0.3s;
+}
+
+.open-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  z-index: 300;
+}
+
+.view { display: none; }
+
+/* ====== GRID（番外用） ====== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+  margin-top: 20px;
+}
+
+/* ====== 番外小故事卡片（gallery 專用） ====== */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 20px;
+  width: 100%;
+  max-width: 260px;
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* 圖片 */
+#gallery .card img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* 卡片整塊可點擊 */
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ====== 角色圖片 ====== */
+.char-img {
   max-width: 45%;
   display: block;
   margin: 12px auto 0;
@@ -46,41 +151,55 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   transform: scale(1.03);
 }
 
-@media (max-width: 768px) {
-  .char-img {
-    max-width: 50%;
-  }
-}
+/* ====== 圖片區（represent 用） ====== */
 .img-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
-  justify-items: center;
-  margin-top: 20px;
+  justify-content: center;
 }
+
 .img-card {
   background: #fff;
   border-radius: 12px;
-  padding: 15px;
+  padding: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  width: 100%;
-  max-width: 240px;
+  width: fit-content;
+  max-width: 100%;
   text-align: center;
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
+.img-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+/* 圖片不裁切 */
+.img-card img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 260px;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+/* 圖片文字 */
 .img-desc {
   margin-top: 10px;
   color: #334155;
   font-weight: 600;
   text-align: center;
 }
-.img-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+
+/* 小繪師字體 */
+.illustrator {
+  font-size: 0.8rem;
+  color: #888;
 }
 
-
+/* ====== 極光背景（你的 img-5 特效） ====== */
 #img-5 {
   position: relative;
   background: linear-gradient(270deg, rgba(18,194,233,0.35), rgba(0,128,128,0.3), rgba(0,255,180,0.25), rgba(12,64,255,0.3));
@@ -167,100 +286,26 @@ h1,h2,h3,h4,p {margin-bottom:12px; text-align:center;}
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* ====== 手機版 ====== */
+@media(max-width:768px){
+  .main { padding: 20px 10px; }
+  .sidebar { width: 200px; }
+  .open-btn { top: 10px; left: 10px; font-size: 18px; }
 
+  .grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  #gallery .card img { max-width: 150px; }
 
-
-/* 響應式文字與內邊距 */
-@media (max-width: 768px) {
-  .aura-background {
-    padding: 20px 15px;
-    font-size: 0.95rem;
-  }
-}
-/* 圖片網格 */
-.img-grid {
-  display: flex;       /* 使用 flex 排列卡片 */
-  flex-wrap: wrap;     /* 多行自動換行 */
-  gap: 20px;           /* 卡片間距 */
-}
-
-/* 卡片容器 */
-.img-card {
-  display: flex;               /* 方便圖片置中 */
-  flex-direction: column;      /* 圖片上方文字置下方 */
-  align-items: center;         /* 水平置中 */
-  justify-content: center;     /* 垂直置中 */
-  height: 250px;               /* 固定高度，可調整 */
-  padding: 10px;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  vertical-align: top;         /* 對齊頂部 */
-  overflow: hidden;            /* 避免圖片超出卡片 */
-  width: fit-content;          /* 寬度隨圖片自動 */
-  transition: transform 0.3s ease-in-out;
-  background: #fff;            /* 可選，保持原樣 */
-  border-radius: 12px;         /* 保持圓角 */
-}
-
-/* 圖片 */
-.img-card img {
-  display: block;             /* 避免底部空隙 */
-  width: auto;                /* 寬度依圖片比例 */
-  height: 100%;               /* 撐滿卡片高度 */
-  max-width: 100%;            /* 避免超出卡片 */
-  object-fit: cover;          /* 保持比例裁切填滿 */
-  border-radius: 12px;        /* 圓角 */
-  transition: transform 0.3s ease-in-out;
-}
-
-/* hover 效果 */
-.zoom-img:hover {
-  transform: scale(1.05);     /* 微放大 */
-}
-
-/* 圖片說明文字 */
-.img-desc {
-  text-align: center;
-  margin-top: 5px;
-  font-size: 14px;
-  color: #333;
-}
-
-/* 繪師字體 */
-.illustrator {
-  font-size: 0.8rem; 
-  color: #888888; 
-  font-weight: normal; 
-}
-/* 手機 / 小螢幕調整 */
-@media (max-width: 768px) {
-  .img-grid {
-    justify-content: center;   /* 小螢幕卡片置中 */
-    gap: 10px;                 /* 間距稍微縮小 */
-  }
+  .char-img { max-width: 50%; }
 
   .img-card {
-    height: auto;              /* 高度隨圖片自適應 */
-    width: 90%;                /* 最大寬度 90% 螢幕 */
-    padding: 8px;
+    width: 90%;
   }
-
   .img-card img {
-    height: auto;              /* 高度自動 */
-    width: 100%;               /* 填滿卡片寬度 */
-    object-fit: contain;       /* 保持比例完整顯示 */
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 }
-
-.card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-
-
-
 
 </style>
 </head>
