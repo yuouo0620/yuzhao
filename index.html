@@ -96,41 +96,47 @@ h1,h2,h3,h4,p{ margin-bottom:12px; text-align:center; }
 }
 
 /* --------------------
-   gallery（番外）卡片：
-   -------------------- */
-.grid{
-  display:flex;
-  flex-wrap:wrap;
-  gap:20px;
-  justify-content:center;
-  margin-top:20px;
+gallery（番外）卡片
+-------------------- */
+.grid {
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
+justify-content: center;
+margin-top: 20px;
 }
 
-.card{
-  background:#fff;
-  border-radius:12px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.05);
-  overflow:hidden;       /* 防止圖片溢出 */
-  width:200px;           /* 可調整寬度 */
-  height:250px;          /* 固定卡片高度 */
-  cursor:pointer;
-  transition:transform .2s;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+.card {
+background: #fff;
+border-radius: 12px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+overflow: hidden;           /* 防止圖片溢出 */
+width: 200px;               /* 卡片寬度 */
+height: 250px;              /* 固定卡片高度 */
+cursor: pointer;
+transition: transform 0.2s;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 
-.card:hover{ transform:translateY(-4px); }
-
-.card img{
-  height:100%;           /* 撐滿卡片高度 */
-  width:auto;            /* 保持比例 */
-  object-fit:cover;      /* 必要裁切 */
-  border-radius:12px 12px 0 0;
+.card:hover {
+transform: translateY(-4px);
 }
 
-/* 圖片卡片整塊可點 */
-.card-link{ display:block; text-decoration:none; color:inherit; }
+.card img {
+height: 100%;               /* 撐滿卡片高度 */
+width: auto;                /* 保持比例 */
+object-fit: cover;          /* 必要裁切 */
+border-radius: 12px 12px 0 0;
+}
+
+/* 整個卡片區塊可點 */
+.card-link {
+display: block;
+text-decoration: none;
+color: inherit;
+}
 
 /* --------------------
    角色介紹
