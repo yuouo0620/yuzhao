@@ -171,24 +171,29 @@ color: inherit;
   margin-top:20px;
 }
 
-/* 卡片*/
-.img-card{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  height:250px;              /* 你原本有的固定高度 */
-  padding:10px;
-  border:1px solid #ccc;
-  box-shadow:0 2px 6px rgba(0,0,0,0.1);
-  vertical-align:top;
-  overflow:hidden;           /* 保留原本裁切效果 */
-  width:fit-content;         /* 卡片寬度以內容（圖片）為主 */
-  max-width:100%;
-  transition:transform .3s ease-in-out;
-  background:#fff;
-  border-radius:12px;
+.open-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+
+  /* 跟卡片風格一致 */
+  background: rgba(255, 255, 255, 0.1); /* 半透明背景 */
+  color: #fff; /* 文字白色 */
+  border: 1px solid rgba(255,255,255,0.2); /* 淡淡的邊框 */
+  border-radius: 12px; /* 圓角 */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* 輕微陰影 */
+  transition: transform 0.3s ease, background 0.2s ease; /* 滑鼠互動效果 */
+  z-index: 300;
 }
+
+.open-btn:hover {
+  transform: scale(1.05); /* 滑鼠懸停輕微放大 */
+  background: rgba(255, 255, 255, 0.2); /* 背景稍微加深 */
+}
+
 
 /* 圖片：保持你原本行為（height:100% -> 撐滿卡片高度；object-fit:cover -> 可能會裁切） */
 .img-card img{
