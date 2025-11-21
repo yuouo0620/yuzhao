@@ -291,6 +291,46 @@ color: inherit;
   width:100%;
 }
 
+/* 🔥 整體字體改白色 */
+body, h1, h2, h3, h4, p, a {
+  color: #ffffff;
+}
+
+/* 🔥 側邊欄透明玻璃效果 */
+.sidebar {
+  background: rgba(255, 255, 255, 0.15);  /* 半透明 */
+  backdrop-filter: blur(10px);            /* 玻璃模糊效果 */
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 🔥 側邊欄內的連結 (a) 變白色 */
+.sidebar a {
+  color: #ffffff;
+}
+
+.sidebar a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* 🔥 側邊欄呼出按鈕透明化 + 玻璃效果 */
+.menu-button {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+/* 🔥 一般卡片 (如果你的網站內有卡片 class，可以套用這裡) */
+.card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+
 </style>
 
 </head>
