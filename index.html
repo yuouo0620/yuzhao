@@ -74,18 +74,23 @@ h1,h2,h3,h4,p{ margin-bottom:12px; text-align:center; }
    主內容與開關按鈕
    -------------------- */
 .main{ flex:1; padding:40px 20px; margin-left:0; transition:margin-left .3s; }
-.open-btn{
-  position:fixed;
-  top:20px;
-  left:20px;
-  font-size:20px;
-  padding:10px 15px;
-  cursor:pointer;
-  background:var(--primary-color);
-  color:#fff;
-  border:none;
-  border-radius:8px;
-  z-index:300;
+.open-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0); /* 透明背景 */
+  color: #fff; /* 文字白色 */
+  border: none; /* 去掉邊框 */
+  border-radius: 8px;
+  z-index: 300;
+  transition: background 0.2s; /* 可選：滑鼠懸停效果 */
+}
+
+.open-btn:hover {
+  background: rgba(255, 255, 255, 0.1); /* 滑鼠懸停時輕微透明背景 */
 }
 
 /* --------------------
