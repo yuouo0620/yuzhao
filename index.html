@@ -221,35 +221,47 @@ h1, h2, h3, h4, p {
 番外小故事卡片
 -------------------- */
 
-#gallery .grid {
-  display: grid;
-  gap: 20px;
-  justify-items: center;
-  margin-top: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  justify-items:center;
+  margin-top:20px;
 }
 
-#gallery .card {
-  width:auto;
-  height:300px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.15);   /* 半透明玻璃效果 */
+.card{
+  background: rgba(255,255,255,0.15);
   backdrop-filter: blur(8px);
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.3);
-  color: #ffffff;
+  color: #fff;
+  box-shadow:0 2px 6px rgba(0,0,0,0.05);
+  padding:20px;
+  width:100%;
+  max-width:260px;  /* gallery 卡片最大寬度（你原本有） */
+  cursor:pointer;
+  transition:transform .2s;
+  margin:0 auto;
+}
+.card:hover{ transform:translateY(-4px); }
 
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  overflow: hidden;
-
-  cursor: pointer;
-  transition: transform .25s ease, background .25s ease;
+/* gallery 圖片（你原本設定：填滿寬度、object-fit:cover） */
+#gallery .card img{
+  width:100%;
+  max-width:200px;
+  height:auto;
+  border-radius:12px;
+  cursor:pointer;
+  object-fit:cover; /* 保持你原本會裁切的行為 */
 }
 
-#gallery .card:hover {
-  transform: translateY(-4px) scale(1.03);
-  background: rgba(255,255,255,0.25);
+/* 整個卡片區塊可點 */
+.card-link {
+display: block;
+text-decoration: none;
+color: inherit;
 }
+
 
 /* 卡片內圖片：靠上、裁切、固定高度 */
 #gallery .card img {
