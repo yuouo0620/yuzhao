@@ -369,7 +369,7 @@ h1, h2, h3, h4, p {
 
   /* 手機圖片不裁切、不固定高 */
   .img-card {
-    width: 90%;
+    width: 100%;
     height: auto;
   }
 
@@ -388,6 +388,13 @@ a, a:hover, a:visited {
   backdrop-filter: blur(6px);
   padding: 2px 4px;
   border-radius: 4px;
+}
+#gallery .grid {
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+  margin-top: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
  
