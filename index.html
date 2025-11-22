@@ -5,28 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>懿生楰你</title>
 <style>
-/* --------------------
-   主題色與全站基礎
-   -------------------- */
-:root{
-  --primary-color:#2b6cb0;
-  --secondary-color:#e0e7ff;
-  --sidebar-bg:#f8fafc;
-  --sidebar-border:#e2e8f0;
+/* =========================================================
+   全站基礎
+========================================================= */
+:root {
+  --primary-color: #2b6cb0;
+  --sidebar-bg: rgba(255,255,255,0.12);
+  --sidebar-border: rgba(255,255,255,0.25);
 }
 
-*{box-sizing:border-box;}
+* { box-sizing: border-box; }
 
-body{
-  margin:0;
-  font-family:'Noto Sans TC',sans-serif;
-  display:flex;
-  min-height:100vh;
-  overflow-x:hidden;
-  text-align:center;
-  background:#fafafa;
+body {
+  margin: 0;
+  font-family: 'Noto Sans TC', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+  text-align: center;
+  color: #fff;
 
-  /* 🔥 新增背景圖設定 */
   background-image: url("天空.PNG");
   background-size: cover;
   background-position: center;
@@ -34,371 +32,25 @@ body{
   background-attachment: fixed;
 }
 
-
-h1,h2,h3,h4,p{ margin-bottom:12px; text-align:center; }
-
-/* --------------------
-   側邊欄（sidebar）
-   -------------------- */
-.sidebar{
-  height:100%;
-  width:0;
-  position:fixed;
-  top:0;
-  left:0;
-  background:var(--sidebar-bg);
-  overflow-x:hidden;
-  transition:0.3s;
-  border-right:1px solid var(--sidebar-border);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  z-index:200;
-}
-.sidebar img{ margin-top:20px; width:80px; height:80px; border-radius:50%; }
-.sidebar h2{ margin:10px 0 20px; color:var(--primary-color); }
-.sidebar a{
-  padding:10px 20px;
-  text-decoration:none;
-  font-size:18px;
-  color:#334155;
-  display:block;
-  width:100%;
-  text-align:center;
-  transition:0.2s;
-}
-.sidebar a:hover,
-.sidebar a.active{ background:var(--secondary-color); color:var(--primary-color); }
-
-/* --------------------
-   主內容與開關按鈕
-   -------------------- */
-.main{ flex:1; padding:40px 20px; margin-left:0; transition:margin-left .3s; }
-.open-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 20px;
-  padding: 10px 15px;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0); /* 透明背景 */
-  color: #fff; /* 文字白色 */
-  border: none; /* 去掉邊框 */
-  border-radius: 8px;
-  z-index: 300;
-  transition: background 0.2s; /* 可選：滑鼠懸停效果 */
-}
-
-.open-btn:hover {
-  background: rgba(255, 255, 255, 0.1); /* 滑鼠懸停時輕微透明背景 */
-}
-
-/* --------------------
-   通用區塊
-   -------------------- */
-.view{ display:none; }
-.back-btn{
-  display:inline-block;
-  margin:8px 6px;
-  padding:8px 14px;
-  background:var(--secondary-color);
-  color:var(--primary-color);
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:600;
-}
-
-/* --------------------
-gallery（番外）卡片
--------------------- */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-  justify-items:center;
-  margin-top:20px;
-}
-
-.card{
-  background:#fff;
-  border-radius:12px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.05);
-  padding:20px;
-  width:100%;
-  max-width:260px;  /* gallery 卡片最大寬度（你原本有） */
-  cursor:pointer;
-  transition:transform .2s;
-  margin:0 auto;
-}
-.card:hover{ transform:translateY(-4px); }
-
-/* gallery 圖片（你原本設定：填滿寬度、object-fit:cover） */
-#gallery .card img{
-  width:100%;
-  max-width:200px;
-  height:auto;
-  border-radius:12px;
-  cursor:pointer;
-  object-fit:cover; /* 保持你原本會裁切的行為 */
-}
-
-/* 整個卡片區塊可點 */
-.card-link {
-display: block;
-text-decoration: none;
-color: inherit;
-}
-
-/* --------------------
-   角色介紹
-   -------------------- */
-/* 透明玻璃風格人物介紹 tabs */
-.tab {
-  padding: 8px 14px;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-
-  background: rgba(255, 255, 255, 0.15);      /* 半透明 */
-  backdrop-filter: blur(6px);                 /* 模糊玻璃 */
-  color: #ffffff;                             /* 白字 */
-  border: 1px solid rgba(255,255,255,0.25);   /* 淡白邊框 */
-  transition: transform .25s ease, background .25s ease;
-}
-
-/* active 狀態（按下的） */
-.tab.active {
-  background: rgba(255, 255, 255, 0.3);        /* 稍微亮一些 */
-  color: #ffffff;
-  transform: scale(1.04);                      /* 微微放大 */
-}
-
-/* hover 效果 */
-.tab:hover {
-  background: rgba(255,255,255,0.25);
-  transform: scale(1.05);
+h1, h2, h3, h4, p {
+  margin-bottom: 12px;
+  color: #fff;
 }
 
 
 
-/* --------------------
-   represent 圖片區（你原本另一區塊）
-   我把它命名為 .img-grid / .img-card，並保留你想要的「高度固定、圖片撐滿高度」行為
-   -------------------- */
-.img-grid{
-  display:flex;              /* 用 flex 排列（先前你有兩種，一併統一成 flex） */
-  flex-wrap:wrap;
-  gap:20px;
-  justify-content:center;
-  margin-top:20px;
-}
-
-.open-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 20px;
-  padding: 10px 15px;
-  cursor: pointer;
-
-  /* 跟卡片風格一致 */
-  background: rgba(255, 255, 255, 0.1); /* 半透明背景 */
-  color: #fff; /* 文字白色 */
-  border: 1px solid rgba(255,255,255,0.2); /* 淡淡的邊框 */
-  border-radius: 12px; /* 圓角 */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* 輕微陰影 */
-  transition: transform 0.3s ease, background 0.2s ease; /* 滑鼠互動效果 */
-  z-index: 300;
-}
-
-
-
-
-/* 圖片：保持你原本行為（height:100% -> 撐滿卡片高度；object-fit:cover -> 可能會裁切） */
-.img-card img{
-  display:block;
-  width:auto;          /* 自動寬度以維持比例 */
-  height:100%;         /* 撐滿卡片高度（保留原功能） */
-  max-width:100%;
-  object-fit:cover;    /* 保留原本會裁切的行為 */
-  border-radius:12px;
-  transition:transform .3s ease-in-out;
-}
-
-/* 如果你想要「不裁切、完整顯示」的替代方案，
-   可以在 HTML 上給某張圖額外 class `contain-img`，CSS 如下（目前不啟用）：
-   .img-card img.contain-img { object-fit: contain; height: auto; width: 100%; }
-*/
-
-/* 圖片說明/繪師字體 */
-.img-desc{ text-align:center; margin-top:5px; font-size:14px; color:#333; }
-.illustrator{ font-size:.8rem; color:#888888; font-weight:normal; }
-
-/* hover 放大（圖片） */
-.zoom-img:hover{ transform:scale(1.05); }
-
-/* --------------------
-   img-5（極光）特效、粒子等：保留原始設定（你原本寫得很完整）
-   （我只把原本內容保留，不改動語法）
-   -------------------- */
-#img-5{
-  position:relative;
-  background: linear-gradient(270deg, rgba(18,194,233,0.35), rgba(0,128,128,0.3), rgba(0,255,180,0.25), rgba(12,64,255,0.3));
-  background-size:1200% 1200%;
-  animation:gradientMove 25s ease infinite;
-  color:black;
-  padding:60px 20px;
-  border-radius:16px;
-  overflow:hidden;
-  text-align:center;
-  box-shadow:0 0 60px rgba(255,255,255,0.1) inset;
-  z-index:0;
-}
-@keyframes gradientMove{
-  0%{ background-position:0% 50%; }
-  50%{ background-position:100% 50%; }
-  100%{ background-position:0% 50%; }
-}
-#img-5::before{
-  content:"";
-  position:absolute;
-  top:-60%; left:-60%;
-  width:220%; height:220%;
-  background:radial-gradient(circle, rgba(0,255,200,0.15) 0%, transparent 70%);
-  animation:waveMove 12s ease-in-out infinite alternate;
-  filter:blur(15px);
-  pointer-events:none;
-  z-index:0;
-}
-@keyframes waveMove{ 0%{ transform:rotate(0deg) scale(1); } 100%{ transform:rotate(30deg) scale(1.08); } }
-
-/* 粒子 */
-#img5-particles{ position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:100; }
-.img5-particle{ position:absolute; border-radius:50%; width:4px; height:4px; opacity:.8; background:rgba(255,255,255,.5); box-shadow:0 0 8px rgba(255,255,255,.5); animation:img5float linear infinite, img5spin linear infinite; }
-@keyframes img5float{ 0%{ transform:translateY(0) translateX(0) scale(1); opacity:0 } 25%{ transform:translateY(-40px) translateX(20px) scale(1.2); opacity:.5 } 50%{ transform:translateY(-90px) translateX(40px) scale(1.4); opacity:.3 } 75%{ transform:translateY(-130px) translateX(10px) scale(1.2); opacity:.4 } 100%{ transform:translateY(-160px) translateX(-20px) scale(1); opacity:0 } }
-@keyframes img5spin{ 0%{ rotate:0deg } 100%{ rotate:360deg } }
-
-/* 淡入文字 */
-.fade-text{ opacity:0; animation:fadeIn 2s ease forwards; animation-delay:.2s; }
-@keyframes fadeIn{ from{ opacity:0; transform:translateY(10px) } to{ opacity:1; transform:translateY(0) } }
-
-/* --------------------
-   響應式（手機 / 小螢幕）
-   - 手機時 img-card 變成高度自適應以免裁切太厲害
-   -------------------- */
-@media (max-width:768px){
-  .main{ padding:20px 10px; }
-  .sidebar{ width:200px; }
-  .open-btn{ top:10px; left:10px; font-size:18px; }
-
-  .grid{ grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; }
-  #gallery .card img{ max-width:150px; }
-
-  .char-img{ max-width:50%; }
-
-  /* 手機上 img-card 改為寬度 90% 與高度自適應 */
-  .img-card{
-    height:auto;       /* 手機上不要固定高度 */
-    width:90%;
-    padding:8px;
-  }
-  .img-card img{
-    height:auto;
-    width:100%;
-    object-fit:contain; /* 手機上顯示完整圖片 */
-  }
-}
-
-/* --------------------
-   補充說明（開發用）
-   - 若想替換某張圖片為「不裁切」顯示，
-     可在該 <img> 上加 class="contain-img"（示範註解）
-   -------------------- */
-.img-card img.contain-img{
-  object-fit:contain;
-  height:auto;
-  width:100%;
-}
-
-/* 🔥 整體字體改白色 */
-body, h1, h2, h3, h4, p, a {
-  color: #ffffff;
-}
-
-/* 🔥 側邊欄透明玻璃效果 */
-.sidebar {
-  background: rgba(255, 255, 255, 0.15);  /* 半透明 */
-  backdrop-filter: blur(10px);            /* 玻璃模糊效果 */
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* 🔥 側邊欄內的連結 (a) 變白色 */
-.sidebar a {
-  color: #ffffff;
-}
-
-.sidebar a:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-}
-
-/* 🔥 側邊欄呼出按鈕透明化 + 玻璃效果 */
-.menu-button {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-}
-
-/* 🔥 一般卡片 (如果你的網站內有卡片 class，可以套用這裡) */
-.card {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-}
-
-/* --------------------
-全站主題色與基礎設定
--------------------- */
-:root {
-  --primary-color: #2b6cb0;
-  --secondary-color: #e0e7ff;
-  --sidebar-bg: rgba(0,0,0,0.5); /* 側邊欄背景半透明 */
-  --sidebar-border: rgba(255,255,255,0.2);
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Noto Sans TC', sans-serif;
-  display: flex;
-  min-height: 100vh;
-  overflow-x: hidden;
-  text-align: center;
-  background-image: url("天空.PNG"); /* 背景圖 */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-/* --------------------
-側邊欄
--------------------- */
+/* =========================================================
+   側邊欄
+========================================================= */
 .sidebar {
   height: 100%;
-  width: 0; /* 初始隱藏 */
+  width: 0;
   position: fixed;
   top: 0;
   left: 0;
   background: var(--sidebar-bg);
   border-right: 1px solid var(--sidebar-border);
+  backdrop-filter: blur(10px);
   overflow-x: hidden;
   transition: width 0.3s ease;
   display: flex;
@@ -407,26 +59,65 @@ body {
   z-index: 200;
 }
 
+.sidebar img {
+  margin-top: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.sidebar h2 {
+  margin: 10px 0 20px;
+}
+
 .sidebar a {
   display: block;
-  text-decoration: none;
-  color: #fff;
   width: 90%;
   padding: 10px 0;
   margin: 5px 0;
   border-radius: 12px;
-  text-align: center;
-  transition: background 0.2s, transform 0.2s;
+  text-decoration: none;
+  color: #ffffff;
+  transition: 0.2s ease;
 }
 
 .sidebar a:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.2);
   transform: scale(1.03);
 }
 
-/* --------------------
-主內容區
--------------------- */
+
+
+/* =========================================================
+   側邊欄開關按鈕
+========================================================= */
+.open-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 300;
+
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 12px;
+  padding: 10px 15px;
+  backdrop-filter: blur(6px);
+
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.open-btn:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.05);
+}
+
+
+
+/* =========================================================
+   主內容區
+========================================================= */
 .main {
   flex: 1;
   padding: 40px 20px;
@@ -434,160 +125,249 @@ body {
   transition: margin-left 0.3s;
 }
 
-/* --------------------
-統一按鈕風格
--------------------- */
-button {
-  background: rgba(255, 255, 255, 0.1); /* 半透明背景 */
-  color: #fff; /* 白字 */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  font-size: 16px;
-  cursor: pointer;
-  transition: transform 0.3s ease, background 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px; /* 固定高度 */
-  min-width: 80px; /* 最小寬度 */
-  padding: 0 15px; /* 左右內距，避免高度膨脹 */
+.view { display: none; }
+
+
+
+/* =========================================================
+   章節用按鈕（上一章 / 下一章 / 目錄）
+========================================================= */
+.back-btn {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.25);
+  text-decoration: none;
+  padding: 8px 16px;
+  margin: 6px;
+  display: inline-block;
+  border-radius: 10px;
+  transition: 0.25s ease;
 }
 
-button:hover {
-  background: rgba(255, 255, 255, 0.2);
+.back-btn:hover {
+  background: rgba(255,255,255,0.25);
   transform: scale(1.05);
 }
 
-/* --------------------
-側邊欄呼出按鈕
--------------------- */
-.open-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 300;
-  /* 套用全局按鈕樣式 */
+
+
+/* =========================================================
+   人物介紹 Tabs（大的分類 & 小的分類）
+========================================================= */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.tab {
+  padding: 8px 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  transition: 0.25s ease;
+}
+
+.tab.active {
+  background: rgba(255,255,255,0.35);
+}
+
+.tab:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.subsection { display: none; }
+.subsection.active { display: block; }
+
+
+
+/* =========================================================
+   番外 & 章節卡片
+========================================================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+}
+
+.card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 20px;
+
+  width: 100%;
+  max-width: 260px;
+
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.25);
 }
 
 /* --------------------
-圖片卡片區
+番外小故事卡片（3 欄 × 固定高度 × 透明玻璃）
 -------------------- */
+
+#gallery .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 每行 3 張 */
+  gap: 20px;
+  justify-items: center;
+  margin-top: 20px;
+}
+
+#gallery .card {
+width:100%;
+  max-width:200px;
+  height:auto;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.15);   /* 半透明玻璃效果 */
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #ffffff;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+
+  cursor: pointer;
+  transition: transform .25s ease, background .25s ease;
+}
+
+#gallery .card:hover {
+  transform: translateY(-4px) scale(1.03);
+  background: rgba(255,255,255,0.25);
+}
+
+/* 卡片內圖片：靠上、裁切、固定高度 */
+#gallery .card img {
+  width: 100%;
+  height: 70%;                /* 佔卡片高度約 70% */
+  object-fit: cover;          /* 裁切維持比例 */
+  border-radius: 10px;
+  display: block;
+}
+
+/* 文字白色，置中 */
+#gallery .card h2 {
+  font-size: 18px;
+  margin-top: 10px;
+  line-height: 1.3;
+  color: #ffffff;
+}
+
+#gallery .illustrator {
+  font-size: 14px;
+  color: #dddddd;
+}
+
+/* =========================================================
+   圖片區（固定高度、不固定寬度）
+========================================================= */
 .img-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  margin-top: 20px;
 }
 
 .img-card {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: rgba(255,255,255,0.12);
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   padding: 15px;
-  width: auto; /* 可調整卡片寬度 */
-  height: 300px; /* 固定卡片高度 */
+  width: auto;
+  height: 300px;   /* ⬅ 你要的固定高度 */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   overflow: hidden;
-  transition: transform 0.3s ease, background 0.2s ease;
+
+  transition: 0.3s ease;
 }
 
 .img-card:hover {
   transform: scale(1.03);
-  background: rgba(255,255,255,0.2);
 }
 
 .img-card img {
   display: block;
-  width: auto;
-  height: 90%; /* 撐滿卡片高度 */
+  height: 100%;
+  width: auto;      /* ⬅ 寬度依比例變化，不固定寬度 */
   max-width: 100%;
-  object-fit: cover; /* 保持裁切效果 */
+  object-fit: cover;
   border-radius: 12px;
-  transition: transform 0.3s ease-in-out;
 }
 
-.img-desc {
-  text-align: center;
-  margin-top: 5px;
-  font-size: 14px;
-  color: #fff;
-}
+.img-desc { margin-top: 5px; color: #fff; }
 
-.illustrator {
-  font-size: 0.8rem;
-  color: #cccccc;
-  font-weight: normal;
-}
 
-.zoom-img:hover {
-  transform: scale(1.05);
-}
 
-/* --------------------
-特殊效果區域（粒子/極光）
--------------------- */
+/* =========================================================
+   極光區域（img-5）
+========================================================= */
 #img-5 {
   position: relative;
-  background: linear-gradient(270deg, rgba(18,194,233,0.35), rgba(0,128,128,0.3), rgba(0,255,180,0.25), rgba(12,64,255,0.3));
+  background: linear-gradient(270deg,
+    rgba(18,194,233,0.35),
+    rgba(0,128,128,0.3),
+    rgba(0,255,180,0.25),
+    rgba(12,64,255,0.3)
+  );
   background-size: 1200% 1200%;
-  animation: gradientMove 25s ease infinite;
-  color: white;
+  animation: gradientMove 25s infinite;
+
+  color: white;   /* 修正黑字 */
   padding: 60px 20px;
   border-radius: 16px;
   overflow: hidden;
 }
 
 @keyframes gradientMove {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.mobile-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("天空.PNG");
-  background-size: cover;
-  background-position: center;
-  z-index: -1; /* 放到內容下面 */
+
+
+/* =========================================================
+   手機版
+========================================================= */
+@media (max-width: 768px) {
+
+  .main { padding: 20px 10px; }
+
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  /* 手機圖片不裁切、不固定高 */
+  .img-card {
+    width: 90%;
+    height: auto;
+  }
+
+  .img-card img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
 }
-
-/* 透明玻璃效果：目錄 / 上一章 / 下一章 按鈕 */
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  margin: 8px 6px;
-  padding: 0 15px;     /* 左右內距 */
-  height: 40px;        /* 與全站按鈕高度一致 */
-  min-width: 80px;
-
-  background: rgba(255, 255, 255, 0.1);   /* 半透明背景 */
-  color: #ffffff;                         /* 白字 */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-
-  transition: transform .3s ease, background .2s ease;
+a, a:hover, a:visited {
+  text-decoration: none !important;
 }
-
-/* hover 效果 */
-.back-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.05);
-}
-
 
 
 </style>
