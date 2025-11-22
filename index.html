@@ -316,30 +316,46 @@ width:100%;
 /* =========================================================
    極光區域（img-5）
 ========================================================= */
-#img-5 {
-  position: relative;
-  background: linear-gradient(270deg,
-    rgba(18,194,233,0.35),
-    rgba(0,128,128,0.3),
-    rgba(0,255,180,0.25),
-    rgba(12,64,255,0.3)
-  );
-  background-size: 1200% 1200%;
-  animation: gradientMove 25s infinite;
-
-  color: white;   
-  padding: 0px 20px;
-  border-radius: 16px;
-  overflow: hidden;
+#img-5{
+  position:relative;
+  background: linear-gradient(270deg, rgba(18,194,233,0.35), rgba(0,128,128,0.3), rgba(0,255,180,0.25), rgba(12,64,255,0.3));
+  background-size:1200% 1200%;
+  animation:gradientMove 25s ease infinite;
+  color:black;
+  padding:60px 20px;
+  border-radius:16px;
+  overflow:hidden;
+  text-align:center;
+  box-shadow:0 0 60px rgba(255,255,255,0.1) inset;
+  z-index:0;
 }
-
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@keyframes gradientMove{
+  0%{ background-position:0% 50%; }
+  50%{ background-position:100% 50%; }
+  100%{ background-position:0% 50%; }
 }
+#img-5::before{
+  content:"";
+  position:absolute;
+  top:-60%; left:-60%;
+  width:220%; height:220%;
+  background:radial-gradient(circle, rgba(0,255,200,0.15) 0%, transparent 70%);
+  animation:waveMove 12s ease-in-out infinite alternate;
+  filter:blur(15px);
+  pointer-events:none;
+  z-index:0;
+}
+@keyframes waveMove{ 0%{ transform:rotate(0deg) scale(1); } 100%{ transform:rotate(30deg) scale(1.08); } }
 
+/* 粒子 */
+#img5-particles{ position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:100; }
+.img5-particle{ position:absolute; border-radius:50%; width:4px; height:4px; opacity:.8; background:rgba(255,255,255,.5); box-shadow:0 0 8px rgba(255,255,255,.5); animation:img5float linear infinite, img5spin linear infinite; }
+@keyframes img5float{ 0%{ transform:translateY(0) translateX(0) scale(1); opacity:0 } 25%{ transform:translateY(-40px) translateX(20px) scale(1.2); opacity:.5 } 50%{ transform:translateY(-90px) translateX(40px) scale(1.4); opacity:.3 } 75%{ transform:translateY(-130px) translateX(10px) scale(1.2); opacity:.4 } 100%{ transform:translateY(-160px) translateX(-20px) scale(1); opacity:0 } }
+@keyframes img5spin{ 0%{ rotate:0deg } 100%{ rotate:360deg } }
 
+/* 淡入文字 */
+.fade-text{ opacity:0; animation:fadeIn 2s ease forwards; animation-delay:.2s; }
+@keyframes fadeIn{ from{ opacity:0; transform:translateY(10px) } to{ opacity:1; transform:translateY(0) } }
 
 /* =========================================================
    手機版
