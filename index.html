@@ -152,11 +152,33 @@ color: inherit;
 /* --------------------
    角色介紹
    -------------------- */
-.tabs{display:flex; justify-content:center; gap:10px; margin:16px 0;}
-.tab{padding:8px 12px; border-radius:8px; background:#f1f5f9; color:#334155; font-weight:600; cursor:pointer;}
-.tab.active{background: var(--primary-color); color:white;}
-.subsection{display:none;}
-.subsection.active{display:block;}
+/* 透明玻璃風格人物介紹 tabs */
+.tab {
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.15);      /* 半透明 */
+  backdrop-filter: blur(6px);                 /* 模糊玻璃 */
+  color: #ffffff;                             /* 白字 */
+  border: 1px solid rgba(255,255,255,0.25);   /* 淡白邊框 */
+  transition: transform .25s ease, background .25s ease;
+}
+
+/* active 狀態（按下的） */
+.tab.active {
+  background: rgba(255, 255, 255, 0.3);        /* 稍微亮一些 */
+  color: #ffffff;
+  transform: scale(1.04);                      /* 微微放大 */
+}
+
+/* hover 效果 */
+.tab:hover {
+  background: rgba(255,255,255,0.25);
+  transform: scale(1.05);
+}
+
 
 
 /* --------------------
