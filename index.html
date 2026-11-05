@@ -195,6 +195,7 @@ h1, h2, h3, h4, p {
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   justify-items: center;
+  margin-top: 20px;
 }
 
 .card {
@@ -204,54 +205,19 @@ h1, h2, h3, h4, p {
   border: 1px solid rgba(255,255,255,0.3);
   color: #fff;
   padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin: 0 auto;
   max-width: 260px;
   width: 100%;
   
 
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: transform .2s;
 }
 
 .card:hover {
   transform: translateY(-4px);
   background: rgba(255,255,255,0.25);
-}
-
-/* --------------------
-番外小故事卡片
--------------------- */
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-  justify-items:center;
-  margin-top:20px;
-}
-
-.card{
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(8px);
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.3);
-  color: #fff;
-  box-shadow:0 2px 6px rgba(0,0,0,0.05);
-  padding:20px;
-  width:100%;
-  cursor:pointer;
-  transition:transform .2s;
-  margin:0 auto;
-}
-.card:hover{ transform:translateY(-4px); }
-
-/* gallery 圖片（你原本設定：填滿寬度、object-fit:cover） */
-#gallery .card img{
-  width:100%;
-  max-width:200px;
-  height:auto;
-  border-radius:12px;
-  cursor:pointer;
-  object-fit:cover; /* 保持你原本會裁切的行為 */
 }
 
 /* 整個卡片區塊可點 */
@@ -265,6 +231,7 @@ color: inherit;
 /* 卡片內圖片：靠上、裁切、固定高度 */
 #gallery .card img {
   width: 100%;
+  max-width: 200px;
   height: 70%;                /* 佔卡片高度約 70% */
   object-fit: cover;          /* 裁切維持比例 */
   border-radius: 10px;
@@ -401,6 +368,22 @@ a, a:hover, a:visited {
   border-radius: 4px;
 }
  
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 999;
+}
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(255,255,255,0.2);
+}
 </style>
 
 </head>
@@ -756,7 +739,7 @@ a, a:hover, a:visited {
   <p style="max-width:700px; margin:0 auto; line-height:1.8; text-align:justify;">
 「司馬懿，這普生我快讀不下去了⋯⋯」<br>
 「這種東西也唸不下去？一天天的妳腦子到底裝了什麼？」<br><br>
-  <a href="#gallery" class="back-btn">返回</a></div></section>
+  </p><a href="#gallery" class="back-btn">返回</a></div></section>
   
 <section id="img-2" class="view"><h2>2025/5/20紀念</h2><img src="520.PNG" style="max-width:40%;"><div class="pa-nav">
   <p style="max-width:700px; margin:0 auto; line-height:1.8; text-align:justify;">
@@ -797,8 +780,7 @@ a, a:hover, a:visited {
   </p><a href="#gallery" class="back-btn">返回</a></div></section>
 
 <section id="img-5" class="view"><div id="img5-particles"></div><h2>一週年紀念</h2><img src="一週年.JPEG" style="max-width:60%;"><div class="pa-nav">
- <p style="max-width:700px; margin:0 auto; line-height:1.8; text-align:justify;">
-<div class="aura-background fade-text">
+ <div class="aura-background fade-text">
 𝟹𝟼𝟻𝙳𝙰𝚈𝚂˚˖˚˳⌖<br><br>
  
 ✧*｡＊.° ·˚✧*｡𝟷𝑠𝑡 𝑎𝑛𝑛𝑖𝑣𝑒𝑟𝑠𝑎𝑟𝑦✧*｡＊.° ·˚✧*｡＊.° ·˚<br><br>
@@ -845,7 +827,7 @@ a, a:hover, a:visited {
 兩人的身影漸漸沒入風雪，朝遠方的燈火前進。<br>
 而極光仍於天際中糾纏，如同他們的命運，如同他們必定相伴的未來。<br><br>
   
-</p><a href="#gallery" class="back-btn">返回</a></div></section>
+</div><a href="#gallery" class="back-btn">返回</a></div></section>
 
 <section id="img-6" class="view"><h2>2026日記情人節</h2><img src="滿版.JPG" style="max-width:40%;"><div class="pa-nav">
   <p style="max-width:700px; margin:0 auto; line-height:1.8; text-align:justify;">
@@ -870,11 +852,20 @@ a, a:hover, a:visited {
 
    
 <script>
-// 主線章節
-const mainChapters=['pa-1','pa-2','pa-3','pa-4','pa-5'];
-function nextChapter(e){ e.preventDefault(); const c=location.hash.replace('#',''); const i=mainChapters.indexOf(c); if(i>=0&&i<mainChapters.length-1) location.hash=mainChapters[i+1]; }
-function prevChapter(e){ e.preventDefault(); const c=location.hash.replace('#',''); const i=mainChapters.indexOf(c); if(i>0) location.hash=mainChapters[i-1]; }
-document.querySelectorAll('#story .card').forEach(card=>{ card.addEventListener('click',()=>location.hash='pa-'+card.dataset.chapter); });
+// 由現有章節元素取得順序，避免新增章節時漏改另一份清單。
+const mainChapters = Array.from(document.querySelectorAll('section.view'))
+  .map(section => section.id).filter(id => /^pa-\d+$/.test(id));
+
+function moveChapter(chapters, direction) {
+  const index = chapters.indexOf(location.hash.slice(1));
+  const next = index + direction;
+  if (index >= 0 && next >= 0 && next < chapters.length) location.hash = chapters[next];
+}
+function nextChapter(event) { event.preventDefault(); moveChapter(mainChapters, 1); }
+function prevChapter(event) { event.preventDefault(); moveChapter(mainChapters, -1); }
+document.querySelectorAll('#story .card').forEach(card => {
+  card.addEventListener('click', () => { location.hash = 'pa-' + card.dataset.chapter; });
+});
 
 // PA 章節資料
 const paChaptersData={
@@ -898,76 +889,79 @@ Object.keys(paChaptersData).forEach(pa=>{
   });
 });
 
-function nextPAChapter(pa){
-  const c=location.hash.replace('#','');
-  const i=paChaptersData[pa].findIndex(ch=>ch.id===c);
-  if(i>=0 && i<paChaptersData[pa].length-1)
-    location.hash=paChaptersData[pa][i+1].id;
-}
-
-function prevPAChapter(pa){
-  const c=location.hash.replace('#','');
-  const i=paChaptersData[pa].findIndex(ch=>ch.id===c);
-  if(i>0)
-    location.hash=paChaptersData[pa][i-1].id;
-}
+function nextPAChapter(pa) { moveChapter(paChaptersData[pa].map(ch => ch.id), 1); }
+function prevPAChapter(pa) { moveChapter(paChaptersData[pa].map(ch => ch.id), -1); }
 
 document.querySelectorAll('#pas .card').forEach(card=>{
   card.addEventListener('click',()=>location.hash='pa-'+card.dataset.pa);
 });
   
-// 顯示對應頁面
-function showSectionFromHash(){ const h=location.hash.replace('#','')||'pas'; document.querySelectorAll('section.view').forEach(sec=>{ sec.style.display=(sec.id===h)?'block':'none'; }); }
-window.addEventListener('hashchange',showSectionFromHash); window.addEventListener('DOMContentLoaded',showSectionFromHash);
+// 所有網址切換共用同一入口；無效網址回到原本的預設世界線頁。
+const views = Array.from(document.querySelectorAll('section.view'));
+const viewsById = new Map(views.map(view => [view.id, view]));
+
+function showSectionFromHash() {
+  const id = location.hash.slice(1) || 'pas';
+  const target = viewsById.get(id) || viewsById.get('pas');
+  views.forEach(view => { view.style.display = view === target ? 'block' : 'none'; });
+  if (target.id === 'img-5') generateImg5Particles();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+window.addEventListener('hashchange', showSectionFromHash);
 
 // 側邊欄
 let sidebarOpen=false; function toggleSidebar(){ const s=document.getElementById('mySidebar'); const m=document.getElementById('mainContent'); if(!sidebarOpen){ s.style.width="250px"; m.style.marginLeft="250px"; } else { s.style.width="0"; m.style.marginLeft="0"; } sidebarOpen=!sidebarOpen; }
 document.querySelectorAll('a[data-target]').forEach(a=>{ a.addEventListener('click',e=>{ e.preventDefault(); location.hash=a.dataset.target; }); });
 
-// 角色切換
-document.querySelectorAll('.tabs .tab[data-char]').forEach(btn=>{ btn.addEventListener('click',()=>{ document.querySelectorAll('.tabs .tab[data-char]').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); document.getElementById('char-sima').style.display=btn.dataset.char==='sima'?'block':'none'; document.getElementById('char-lin').style.display=btn.dataset.char==='lin'?'block':'none'; }); });
-document.querySelectorAll('#char-sima .tabs .tab').forEach(tab=>{ tab.addEventListener('click',()=>{ document.querySelectorAll('#char-sima .tabs .tab').forEach(t=>t.classList.remove('active')); tab.classList.add('active'); ['sima-wei','sima-modern','sima-shan'].forEach(id=>document.getElementById(id).classList.remove('active')); document.getElementById('sima-'+tab.dataset.world).classList.add('active'); }); });
-document.querySelectorAll('#char-lin .tabs .tab').forEach(tab=>{ tab.addEventListener('click',()=>{ document.querySelectorAll('#char-lin .tabs .tab').forEach(t=>t.classList.remove('active')); tab.classList.add('active'); ['lin-wei','lin-modern','lin-shan'].forEach(id=>document.getElementById(id).classList.remove('active')); document.getElementById(tab.dataset.world).classList.add('active'); }); });
-
-// 圖片獨立頁面
-document.querySelectorAll('#gallery .card img').forEach((img,index)=>{
-  const imgId = 'img-'+(index+1);
-  img.addEventListener('click',()=> location.hash=imgId);
+// 角色與世界線共用切換邏輯，並保留各角色目前選擇的世界線。
+function activateTab(button, buttons, panels, targetId) {
+  buttons.forEach(tab => tab.classList.toggle('active', tab === button));
+  panels.forEach(panel => panel.classList.toggle('active', panel.id === targetId));
+}
+const characterTabs = document.querySelectorAll('[data-char]');
+const characterPanels = document.querySelectorAll('#char-sima, #char-lin');
+characterTabs.forEach(button => {
+  button.addEventListener('click', () => {
+    activateTab(button, characterTabs, characterPanels, 'char-' + button.dataset.char);
+  });
 });
+characterPanels.forEach(panel => {
+  const tabs = panel.querySelectorAll('[data-world]');
+  const panels = panel.querySelectorAll('.subsection');
+  tabs.forEach(button => {
+    button.addEventListener('click', () => {
+      const world = button.dataset.world;
+      const targetId = panel.id === 'char-sima' ? 'sima-' + world : world;
+      activateTab(button, tabs, panels, targetId);
+    });
+  });
+});
+
 // Lightbox 彈出圖片放大
 const lightbox = document.createElement('div');
 lightbox.id = 'lightbox';
 document.body.appendChild(lightbox);
 
-lightbox.style.position = 'fixed';
-lightbox.style.top = '0';
-lightbox.style.left = '0';
-lightbox.style.width = '100%';
-lightbox.style.height = '100%';
-lightbox.style.background = 'rgba(0,0,0,0.8)';
-lightbox.style.display = 'flex';
-lightbox.style.alignItems = 'center';
-lightbox.style.justifyContent = 'center';
-lightbox.style.padding = '20px';
-lightbox.style.zIndex = '999';
-lightbox.style.display = 'none';
-
+lightbox.setAttribute('role', 'dialog');
+lightbox.setAttribute('aria-modal', 'true');
+lightbox.setAttribute('aria-label', '放大圖片，點擊或按 Escape 關閉');
 const imgBox = document.createElement('img');
-imgBox.style.maxWidth = '90%';
-imgBox.style.maxHeight = '90%';
-imgBox.style.borderRadius = '12px';
-imgBox.style.boxShadow = '0 2px 10px rgba(255,255,255,0.2)';
 lightbox.appendChild(imgBox);
 
 document.querySelectorAll('.zoom-img').forEach(img => {
   img.addEventListener('click', () => {
     lightbox.style.display = 'flex';
     imgBox.src = img.src;
+    imgBox.alt = img.alt;
   });
 });
 
 lightbox.addEventListener('click', () => {
   lightbox.style.display = 'none';
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') lightbox.style.display = 'none';
 });
 
 let img5ParticlesGenerated = false;
@@ -994,39 +988,8 @@ function generateImg5Particles() {
   }
 }
 
-// 初次載入或 hash 變化時生成粒子
-function checkImg5() {
-  if (location.hash === "#img-5") generateImg5Particles();
-}
-window.addEventListener("hashchange", checkImg5);
-window.addEventListener("DOMContentLoaded", checkImg5);
-
-function showSection(sectionId) {
-  document.querySelectorAll(".view").forEach(v => v.style.display = "none");
-  document.getElementById(sectionId).style.display = "block";
-
-  // 進到新頁面後捲到最上方
-  window.scrollTo({ top: 0, behavior: "instant" });
-}
-// 番外圖片頁面自動回到最上方
-window.addEventListener("hashchange", () => {
-  const id = location.hash.replace("#", "");
-  const target = document.getElementById(id);
-
-  if (target && target.classList.contains("view")) {
-    // 顯示該頁面
-    document.querySelectorAll(".view").forEach(v => v.style.display = "none");
-    target.style.display = "block";
-
-    // 捲到最上方
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }
-});
-
-
-
+// Script 位於內容之後，可直接完成初始顯示。
+showSectionFromHash();
 </script>
-
-</div>
 </body>
 </html>
